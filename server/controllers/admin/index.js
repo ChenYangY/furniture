@@ -6,7 +6,6 @@ var router = Router();
 const productController = require('./products.controller');
 const productBrandController = require('./proudctBrands.controller');
 const carouselsController = require('./carousels.controller');
-const proudctBrandsController = require('./proudctBrands.controller');
 
 
 function addResourceRoute(urlPath, router, controllerInst) {
