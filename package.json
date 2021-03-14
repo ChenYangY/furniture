@@ -1,0 +1,32 @@
+{
+  "name": "furniture",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "config": {
+    "nuxt": {
+      "host": "127.0.0.1",
+      "port": "3000"
+    }
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "bootstrap": "^4.6.0",
+    "bootstrap-vue": "^2.21.2",
+    "core-js": "^3.8.3",
+    "express": "^4.17.1",
+    "lodash": "^4.17.21",
+    "mongoose": "^5.11.15",
+    "nuxt": "^2.14.12",
+    "vue": "^2.6.12"
+  },
+  "devDependencies": {
+    "eslint": "^7.22.0",
+    "eslint-plugin-vue": "^7.7.0"
+  }
+}
