@@ -4,7 +4,7 @@
     <b-container fluid='xs'>
       <b-row>
         <b-col class='col-3' type='dark' variant='dark'>
-          <AdminMenu :menus="menus"/>
+          <AdminMenu :menus="menus" :current="current" />
         </b-col>
         <b-col>
         </b-col>
@@ -22,6 +22,7 @@ export default {
   data() {
     return {
       menus: this.$store.state.menus,
+      current: '品牌管理',
     };
   },
   computed: {
@@ -35,3 +36,4 @@ export default {
   }
 };
 </script>
+
