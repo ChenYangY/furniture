@@ -35,13 +35,13 @@ app.use('/admin-api', adminRouter);
 async function start() {
   // Import and Set Nuxt.js options
   // let config = require('../nuxt.config.js');
-  // const isDev = !(process.env.NODE_ENV === 'production');
-  // // Instanciate nuxt.js
-  // const nuxt = await loadNuxt(isDev ? 'dev' : 'start');
-  // app.use(nuxt.render);
-  // if (isDev) {
-  //   build(nuxt);
-  // }
+  const isDev = !(process.env.NODE_ENV === 'production');
+  // Instanciate nuxt.js
+  const nuxt = await loadNuxt(isDev ? 'dev' : 'start');
+  app.use(nuxt.render);
+  if (isDev) {
+    build(nuxt);
+  }
   app.listen(port, host);
   console.log('Server listening on ' + host + ':' + port);
 }

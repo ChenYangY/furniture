@@ -13,7 +13,7 @@ class CRUDService {
     return this.getModel().deleteOne(id);
   }
 
-  updateBydId(id, data) {
+  updateById(id, data) {
     return this.getModel().updateOne({_id: id}, {$set: data});
   }
 

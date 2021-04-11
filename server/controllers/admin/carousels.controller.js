@@ -10,7 +10,7 @@ class CarouselController extends CRUDController {
 
   format(doc) {
     const fields = [
-      '_id', 'name', 'create_at', 'update_at', 'images'
+      '_id', 'name', 'create_at', 'update_at', 'images', 'status',
     ];
     return _.pick(doc, fields);
   }

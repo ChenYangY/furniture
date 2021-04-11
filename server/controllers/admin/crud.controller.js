@@ -7,7 +7,7 @@ class CRUDController {
   getPagination(req) {
     const page = parseInt(req.query.page, 10) || 1;
     const size = parseInt(req.query.size, 10) || 10;
-    return {skip: (page - 1)*10, limit: size};
+    return {skip: (page - 1)*size, limit: size};
   }
 
   // this method need to overwrite
@@ -83,7 +83,7 @@ class CRUDController {
   }
 
   delete(req, res) {
-    this.service.deleteById(req.params.id)
+    this.service.deleteById({_id: req.params.id})
       .then(() => {
         this.responseController('', res, {});
       })
@@ -93,6 +93,7 @@ class CRUDController {
   }
 
   responseController(err, res, data) {
+    console.log(err);
     let pack = MyUtil.wrapperResponse(err, data);
     res.json(pack);
   }

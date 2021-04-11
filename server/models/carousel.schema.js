@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const CarouselSchema = new Schema({
   name: {type: String },
+  status: {type: String, default: 'OFF', enum: ['ON', 'OFF']},
   images:[{
     url: {type: String},
     redirect: {type: String},

@@ -20,7 +20,7 @@ function addResourceRoute(urlPath, router, controllerInst) {
     controllerInst.show(req, res);
   });
   router.put(`/${urlPath}/:id`, function(req, res) {
-    controllerInst.put(req, res);
+    controllerInst.update(req, res);
   });
   router.delete(`/${urlPath}/:id`, function(req, res) {
     controllerInst.delete(req, res);
