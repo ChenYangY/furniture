@@ -6,6 +6,7 @@ var router = Router();
 const productController = require('./products.controller');
 const productBrandController = require('./proudctBrands.controller');
 const carouselsController = require('./carousels.controller');
+const fileController = require('./file.controller');
 
 
 function addResourceRoute(urlPath, router, controllerInst) {
@@ -33,6 +34,11 @@ addResourceRoute('product-brands', router, productBrandController);
 
 // Add product-brand routes
 addResourceRoute('carousels', router, carouselsController);
+
+router.post('/upload', function(req, res, next) {
+  console.log('hello');
+  fileController.upload(req, res, next);
+});
 
 
 

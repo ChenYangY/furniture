@@ -1,3 +1,4 @@
+const MyUtil = require('../../common/myutil');
 class CRUDController {
   constructor() {
     this.service = {};
@@ -92,20 +93,7 @@ class CRUDController {
   }
 
   responseController(err, res, data) {
-    let pack;
-    if (err) {
-      pack = {
-        code: -1,
-        msg: err.toString(),
-      };
-    }
-    else {
-      pack = {
-        code: 0,
-        msg: 'ok',
-        data: data
-      };
-    }
+    let pack = MyUtil.wrapperResponse(err, data);
     res.json(pack);
   }
 
