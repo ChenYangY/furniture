@@ -1,6 +1,6 @@
 <template>
-  <b-container>
-    <b-form @submit="onSubmit">
+  <b-container fluid>
+    <b-form @submit="onSubmit" style='margin-top: 260px;'>
       <b-input-group class="mb-3">
         <b-input-group-prepend is-text>
           <b-icon icon="person-fill"></b-icon>
