@@ -8,7 +8,7 @@ class MyUtil {
     if(err) {
       return  {
         code: -1,
-        msg: err.toStirng(),
+        msg: err.toString(),
       };
     }
     return {

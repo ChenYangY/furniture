@@ -36,7 +36,6 @@ addResourceRoute('product-brands', router, productBrandController);
 addResourceRoute('carousels', router, carouselsController);
 
 router.post('/upload', function(req, res, next) {
-  console.log('hello');
   fileController.upload(req, res, next);
 });
 

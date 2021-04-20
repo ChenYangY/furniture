@@ -14,7 +14,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload({
   limits: { fileSize: 5 * 1024 * 1024 },
   limitHandler: function(req, res) {
-    console.log('hello');
     res.json({
       msg: '文件太大了',
       code: -1,
