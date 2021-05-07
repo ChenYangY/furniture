@@ -117,7 +117,7 @@
 </style>
 
 <script>
-import axios from 'axios';
+import { mapState } from 'vuex';
 import AdminBar from '../../components/admin/bar';
 import AdminMenu from '../../components/admin/menu';
 export default {
@@ -126,16 +126,6 @@ export default {
     return {
       menus: this.$store.state.menus,
       current: '轮播图管理',
-      datas: this.$store.state.admin.carousels.datas,
-      fields: [
-        {key: '_id',label: 'Id'},
-        {key: 'name',label: '名称'},
-        {key: 'status',label: '状态'},
-        {key: 'create_at', label: '创建时间'},
-        {key: 'update_at', label: '更新时间'},
-        {key: 'actions', label: '操作'}
-      ],
-      totalRows: 10,
       pageSize: parseInt(this.$route.query.size, 10) || 10,
       pageCur: parseInt(this.$route.query.page, 10) || 1,
       carouselForm: {
@@ -147,9 +137,14 @@ export default {
         redirect: '',
         file: null,
       },
-      updateForm: {},
     };
   },
+  computed: mapState({
+    datas: states => states.admin.carousels.datas,
+    // carouselForm: states => states.admin.carousels.carouselForm,
+    fields: states => states.admin.carousels.fields,
+    totalRows: states => states.admin.carousels.totalRows,
+  }),
   methods: {
     changePage(curPage) {
       this.$route.query.page = curPage;
@@ -166,7 +161,7 @@ export default {
       else {
         item.status = 'OFF';
       }
-      const res = await this.$store.commit('admin/carousels/setStatus', {
+      const res = await this.$store.dispatch('admin/carousels/setStatus', {
         id: item._id,
         status: item.status,
       });
@@ -175,10 +170,7 @@ export default {
       }
     },
     async addImageItem() {
-      let form = new FormData();
-      form.append('file', this.carouselForm.file);
-      let response = await axios.post('/admin-api/upload', form);
-      let body = response.data || {};
+      let body = await this.$store.dispatch('admin/upload', this.carouselForm.file);
       if(body.code !== 0) {
         console.log(body.msg);
         return;
@@ -197,33 +189,40 @@ export default {
       this.carouselForm.images.splice(idx, 1);
     },
     clickCreate() {
+      this.clearCarouselForm();
+      this.$bvModal.show('carousel_modal');
+    },
+    clickUpdate(item) {
+      this.clearCarouselForm();
+      this.updateCarousel(item);
+      this.$bvModal.show('carousel_modal');
+    },
+    clearCarouselForm() {
       this.carouselForm.title = '创建轮播图';
       this.carouselForm._id = '';
       this.carouselForm.name = '';
       this.carouselForm.images = [];
-      this.$bvModal.show('carousel_modal');
     },
-    clickUpdate(item) {
-      console.log(item);
+    updateCarousel(item) {
       this.carouselForm.title = '更新轮播图';
       this.carouselForm._id = item._id;
       this.carouselForm.btnSumitLabel = '更新';
       this.carouselForm.name = item.name;
-      this.carouselForm.images = item.images;
-      this.$bvModal.show('carousel_modal');
+      this.carouselForm.images = item.images.concat([]);
     },
     async submitCarouselForm() {
       let data = {
+        _id: this.carouselForm._id,
         name: this.carouselForm.name,
         images: this.carouselForm.images,
       };
+      this.$store.commit('admin/carousels/setCarouselForm',data);
+
       if(!this.carouselForm._id) {
-        await this.$store.commit('admin/carousels/create', data);
+        await this.$store.dispatch('admin/carousels/create');
       }
       else {
-        data.id = this.carouselForm._id;
-        console.log(data);
-        await this.$store.commit('admin/carousels/update', data);
+        await this.$store.dispatch('admin/carousels/update');
       }
       this.$bvModal.hide('carousel_form', 'hide');
       this.carouselForm._id = '';
@@ -232,8 +231,7 @@ export default {
       this.$fetch();
     },
     async deleteRecord(item, index) {
-      await this.$store.commit('admin/carousels/remove', item._id);
-      this.datas.splice(index, 1);
+      await this.$store.dispatch('admin/carousels/remove', {id: item._id, idx: index});
       this.$fetch();
     },
 
@@ -244,21 +242,7 @@ export default {
     query.page = parseInt(this.$route.query.page, 10) || 1;
     query.size = parseInt(this.$route.query.size, 10) || 10;
     query.sort = '-create_at';
-    let params = [];
-    Object.keys(query).forEach((key) => {
-      params.push(`${key}=${query[key]}`);
-    });
-    const result = await axios.get(
-      `/admin-api/carousels?${params.join('&')}`
-    );
-    const res = result.data;
-    if(res.code === -1) {
-      console.log(res.msg);
-      return;
-    }
-    // console.log(query);
-    this.datas = res.data.docs;
-    this.totalRows = res.data.count;
+    await this.$store.dispatch('admin/carousels/index', query);
     this.pageSize = query.size || 10;
     this.pageCur = query.page || 1;
     this.$refs.paginationComponent.currentPage = query.page;
