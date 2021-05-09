@@ -10,7 +10,7 @@ class ProductController extends CRUDController {
 
   format(doc) {
     const fields = [
-      '_id', 'name','logo'
+      '_id', 'name','logo', 'description','create_at', 'update_at',
     ];
     return _.pick(doc, fields);
   }

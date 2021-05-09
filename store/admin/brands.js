@@ -1,18 +1,18 @@
 import axios from 'axios';
-const routePath = '/admin-api/carousels';
+const routePath = '/admin-api/product-brands';
 export const state = () => ({
   fields: [
     {key: '_id',label: 'Id'},
     {key: 'name',label: '名称'},
-    {key: 'status',label: '状态'},
-    {key: 'create_at', label: '创建时间'},
-    {key: 'update_at', label: '更新时间'},
+    {key: 'logo',label: 'logo'},
+    {key: 'description',label: '介绍'},
     {key: 'actions', label: '操作'}
   ],
-  carouselForm: {
+  brandForm: {
     _id: '',
     name: '',
-    images: []
+    logo: '',
+    description: '',
   },
   totalRows: 10,
   datas: [],
@@ -23,7 +23,7 @@ export const mutations = {
     state.datas.splice(idx, 1);
   },
   update(state, id) {
-    let keys = ['images', 'name'];
+    let keys = ['name', 'logo', 'description'];
     let idx = -1;
     state.datas.forEach((item, index) => {
       if(item._id.toString() === id) {
@@ -31,20 +31,17 @@ export const mutations = {
       }
     });
     keys.forEach((key)=> {
-      state.datas[idx][key] = state.carouselForm[key];
+      state.datas[idx][key] = state.brandForm[key];
     });
-  },
-  setStatus(state, {idx, status}) {
-    state.datas[idx].status = status;
   },
   index(state, data) {
     state.datas = data.docs;
     state.totalRows = data.count;
   },
-  setCarouselForm(state, data) {
-    let fields = ['_id', 'name', 'images'];
+  setBrandForm(state, data) {
+    let fields = ['_id', 'name', 'logo', 'description'];
     fields.forEach((field) => {
-      state.carouselForm[field] = data[field];
+      state.brandForm[field] = data[field];
     });
   }
 };
@@ -52,8 +49,9 @@ export const mutations = {
 export const actions = {
   async create({state}) {
     let data = {
-      name: state.carouselForm.name,
-      images: state.carouselForm.images,
+      name: state.brandForm.name,
+      logo: state.brandForm.logo,
+      description: state.brandForm.description,
     };
     const res = await axios.post(routePath, data);
     return res.data;
@@ -65,11 +63,12 @@ export const actions = {
   },
   async update({commit, state}) {
     let data = {
-      name: state.carouselForm.name,
-      images: state.carouselForm.images,
+      name: state.brandForm.name,
+      logo: state.brandForm.logo,
+      description: state.brandForm.description,
     };
-    const res = await axios.put(`${routePath}/${state.carouselForm._id}`, data);
-    commit('update', state.carouselForm._id);
+    const res = await axios.put(`${routePath}/${state.brandForm._id}`, data);
+    commit('update', state.brandForm._id);
     return res.data;
   },
   async setStatus({commit}, {id, idx, status}) {
