@@ -57,9 +57,9 @@
                 <span>Branding</span>
               </div>
             </div>
-            <div style='width: 100%; margin-bottom:0.5rem;'>
+            <div style='width: 100%; margin-bottom:0.5rem;' class='clearfix'>
               <b-img src='/images/first_production.png' style='width: 27rem;'/>
-              <b-img src='/images/first_production_1.png' style='width: 27rem;'/>
+              <b-img src='/images/first_production_1.png' style='width: 27rem;' />
             </div>
             <div class='product-spec-content'>艺术画廊包含艺术展览、艺术橱窗以及快闪等多个艺术相关活动。拓展传统艺术的界限，挖掘艺术的无限可能性，让观众感知以不同载体呈现的艺术，并带领他们进入无限遐想的艺术世界。为了深入探索家具主人的生活态度，观察家具与人、人与人之间的亲密连结，自制栏目“在家”、“串门”，从不同维度出发，讲述家具，设计与人的故事。</div>
           </div>
@@ -167,6 +167,7 @@ export default {
   .carousel-box {
     width: 100%;
     height: 47rem;
+    overflow: hidden;
   }
   .carousel-indicators {
     margin-bottom: 9.5rem;
@@ -186,6 +187,7 @@ export default {
   .home-body {
     padding: 0 3.75rem;
     background-color: #E5E5E5;
+    width: 100%;
     position: absolute;
   }
 
@@ -194,7 +196,6 @@ export default {
     border-radius: 5px;
     margin-top: -7rem;
     background:white;
-    width: 63rem;
   }
   .introduction-brand {
     opacity: 0.3;
