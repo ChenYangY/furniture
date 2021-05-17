@@ -1,46 +1,23 @@
 <template>
   <b-container fluid style='padding: 0px;overflow-x:hidden;'>
-    <div style='background-color:#c6c6c6;'>
-      <NavBar logoColor="white" />
-      <div class='carousel-box'>
-        <b-carousel
-        id="carousel-1"
-        v-model="slide"
-        :interval="4000"
-        indicators
-        background="#ababab"
-        img-width="1024"
-        img-height="480"
-        style="text-shadow: 1px 1px 2px #333;"
-        @sliding-start="onSlideStart"
-        @sliding-end="onSlideEnd"
-        >
-          <b-carousel-slide
-            img-src="https://picsum.photos/1024/480/?image=52"
-          ></b-carousel-slide>
-
-          <!-- Slides with custom text -->
-          <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=54">
-          </b-carousel-slide>
-
-          <!-- Slides with image only -->
-          <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=58"></b-carousel-slide>
-
-          <!-- Slides with img slot -->
-          <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
-          <b-carousel-slide>
-            <template #img>
-              <img
-                class="d-block img-fluid w-100"
-                width="1024"
-                height="480"
-                src="https://picsum.photos/1024/480/?image=55"
-                alt="image slot"
-              >
-            </template>
-          </b-carousel-slide>
-        </b-carousel>
-      </div>
+    <NavBar logoColor="white" />
+    <div class='carousel-box'>
+      <b-carousel
+      id="carousel-1"
+      v-model="slide"
+      :interval="4000"
+      indicators
+      background="#ababab"
+      img-width="1400"
+      img-height="940"
+      style="text-shadow: 1px 1px 2px #333;"
+      @sliding-start="onSlideStart"
+      @sliding-end="onSlideEnd"
+      >
+        <b-carousel-slide
+          img-src="/images/carousel_example.png"
+        ></b-carousel-slide>
+      </b-carousel>
     </div>
     <div class='home-body clearfix'>
       <div class='introduction-area left'>
@@ -48,7 +25,7 @@
         <div class='introduction-title' style='margin-right:1.5rem;'>品牌全新实验性的产品线。现代简约而不失温度感。</div>
         <div class='introduction-breif'>有别于延续传统工艺探索的设计，FF系列在设计语言上更为简洁直接， 以多元材质和工艺结合赋予家具更多可能。</div>
         <div class='introduction-content'>品牌中最早的一条线，关注寻常生活中真实所需的家居设计，简单质朴，在葆有中国的设计语言的基础上，将大自然中的树木变为与家相融的家具，在四季更迭中长久陪伴，慢慢变成我们的家人。</div>
-        <b-img class='introduction-img' style='float:left;margin-top: 0.75rem;margin-bottom:1.5rem; width: 55.5rem;' src='/images/introduction_img.png' />
+        <b-img class='introduction-img left' style='margin-top: 0.75rem;margin-bottom:1.5rem; width: 55.5rem;' src='/images/introduction_img.png' />
         <div>
           <div class='introduction-content' style='margin-right:1.5rem;'>脊线系列的灵感来源于大自然以及儿时记忆，扎根中国传统文化，将更具东方空灵艺术性的元素融合深沉肃穆的设计语言。以螳螂椅为首款产品，历时3年，从设计、结构到工艺，不断推敲升级产品线</div>
           <div class='introduction-content'>采用大曲线，多细节的实木加工，配合国际品牌的面料，突出现代中国家具的雕塑感，艺术感以及为生活带来仪式感。</div>
@@ -188,10 +165,11 @@ export default {
 
 <style>
   .carousel-box {
-    padding: 2.5rem 7.25rem 7rem 7.25rem;
+    width: 100%;
+    height: 47rem;
   }
   .carousel-indicators {
-    margin-bottom: 2.5rem;
+    margin-bottom: 9.5rem;
   }
   .carousel-indicators .active {
     border: 4px solid white;
@@ -206,9 +184,9 @@ export default {
     opacity: 1;
   }
   .home-body {
-    padding-left: 3.75rem;
-    padding-right: 3.75rem;
+    padding: 0 3.75rem;
     background-color: #E5E5E5;
+    position: absolute;
   }
 
   .introduction-area {
@@ -216,6 +194,7 @@ export default {
     border-radius: 5px;
     margin-top: -7rem;
     background:white;
+    width: 63rem;
   }
   .introduction-brand {
     opacity: 0.3;

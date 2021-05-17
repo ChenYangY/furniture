@@ -74,7 +74,14 @@
 
 <style scoped>
   .navbar {
-    padding: 32px 10% 0px 10%;
+    padding: 32px 147px 0px 147px;
+    position: fixed;
+    width: 100%;
+    background: #c6c6c6;
+    z-index: 1000;
+  }
+  .row {
+    margin: 0;
   }
   .navbar-item {
     padding: 25px 0px;
