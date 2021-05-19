@@ -1,10 +1,12 @@
 <template>
   <div class='row navbar'>
     <Logo :color= "logoColor" />
-    <div class='navbar-item'>
-      <a href='#' :class="current === '首页'? 'active': ''">首页</a>
+    <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'">
+      <a href='#' :class="current === '首页'? 'active':''">首页</a>
     </div>
-    <div class='navbar-item' @mouseover="menus.products.isShow=true" @mouseleave="menus.products.isShow=false">
+    <div
+      :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'"
+      @mouseover="menus.products.isShow=true" @mouseleave="menus.products.isShow=false">
       <a href='#' :class="current === '产品'? 'active': ''" >产品</a>
       <div class='sub-menu' v-show="menus.products.isShow">
         <ul class="sub-menu-list">
@@ -14,7 +16,7 @@
         </ul>
       </div>
     </div>
-    <div class='navbar-item' @mouseover="menus.brands.isShow=true" @mouseleave="menus.brands.isShow=false">
+    <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'" @mouseover="menus.brands.isShow=true" @mouseleave="menus.brands.isShow=false">
       <a href='#'>品牌</a>
       <div class='sub-menu' v-show="menus.brands.isShow">
         <ul class="sub-menu-list">
@@ -24,50 +26,64 @@
         </ul>
       </div>
     </div>
-    <div class='navbar-item'>
+    <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'">
       <a href='#' >公众号</a>
     </div>
-    <div class='navbar-item'>
+    <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'">
       <a href='#' :class="current === '关于我们'? 'active': ''">关于我们</a>
     </div>
-    <div class='navbar-item'>
+    <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'">
       <b-input-group class='search'>
         <b-input-group-prepend>
           <b-img src='/images/grey_search.png' />
         </b-input-group-prepend>
-        <b-form-input :change='search' style='border: 0;'/>
+        <b-form-input :change='search' style='border: 0;' placeholder="在此输入搜索内容"/>
       </b-input-group>
 
     </div>
-    <div class='navbar-item'>
-      <b-img src='/images/menu_item_light.png' width="28px" height="12px"/>
+    <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'">
+      <div class='ellipse'></div>
     </div>
   </div>
 </template>
 
 <style scoped>
   .navbar {
-    padding: 32px 10% 0px 10%;
+    padding: 35px 10% 0 10%;
+    border: 1px solid black;
   }
-  .navbar-item {
+  .navbar-item-light, .navbar-item-dark {
     padding: 25px 0px;
     text-decoration-line: none;
   }
-  .navbar-item > a {
+  .navbar-item-light > a {
     color:#FFF;
   }
-  .navbar-item > a:hover {
+
+  .navbar-item-dark > a {
+    color: black;
+  }
+  .navbar-item-light > a:hover {
     text-decoration-line: none;
-    color: #FFF;
+    /* color: #FFF; */
     padding-bottom: 6px;
     border-bottom: 2px solid #fff;
   }
 
-  .navbar-item .active {
+  .navbar-item-dark > a:hover {
     text-decoration-line: none;
-    color: #FFF;
+    padding-bottom: 6px;
+    border-bottom: 2px solid black;
+  }
+
+  .navbar-item-light .active {
+    text-decoration-line: none;
     padding-bottom: 6px;
     border-bottom: 2px solid #fff;
+  }
+
+  .navbar-item-dark .active {
+    padding-bottom: 6px;
   }
 
   .sub-menu {
@@ -80,7 +96,7 @@
     z-index: 1000;
     background: rgba(255, 255, 255);
     border-radius: 5px;
-    padding: 1rem;
+    padding: 2rem;
     border-bottom: 1px solid #c6c6c5;
   }
   .sub-menu-title {
@@ -105,14 +121,15 @@
     color: black;
   }
 
-  .navbar-item > .search {
+  .navbar-item-light > .search, .navbar-item-dark > .search {
     width: 11.8rem;
     height: 1.8rem;
     background: white;
     overflow: hidden  ;
     border-radius: 2px;
+    border: 1px solid #c6c6c6;
   }
-  .navbar-item > .search img {
+  .navbar-item-dark > .search img, .navbar-item-light > .search img {
     padding: .4rem 0.75rem;
     height: 1.8rem;
   }
@@ -120,6 +137,19 @@
     padding: 0;
     height: 1.8rem;
     line-height: 1.8rem;
+  }
+  .navbar-item-light .ellipse {
+    height: .4rem;
+    width: 1.4rem;
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+  }
+
+  .navbar-item-dark .ellipse {
+    height: .4rem;
+    width:1.4rem;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
   }
 
 </style>
@@ -156,7 +186,7 @@ export default {
       }
     };
   },
-  props: ['logoColor', 'current'],
+  props: ['logoColor', 'fontColor', 'current'],
   fetchOnServer: false,
   async fetch() {
     // TODO: add request
