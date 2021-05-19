@@ -1,7 +1,7 @@
 <template>
   <b-container fluid style='padding: 0px;overflow-x:hidden;'>
     <div style='background-color:#c6c6c6;'>
-      <NavBar logoColor="white" />
+      <NavBar logoColor="white" current="首页"/>
       <div class='carousel-box'>
         <b-carousel
         id="carousel-1"
