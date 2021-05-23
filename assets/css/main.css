@@ -12,8 +12,20 @@ h2 {
 .clearfix {
   clear: both;
 }
+
 html, body {
   font-family:  Han Sans SC !important;
+}
+
+.page-footer {
+  padding: 5rem 0px;
+}
+
+.page-footer p {
+  display: block;
+  font-weight: 500;
+  margin: 0;
+  text-align: center;
 }
 
 

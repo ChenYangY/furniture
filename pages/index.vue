@@ -145,8 +145,8 @@
         </div>
         <div class='product-list-area-item-more left'><b-link src='#'>查看更多</b-link></div>
       </div>
-      <footer class='home-body-footer clearfix'>
-        <p style='text-align: center;'>2021 © Sigma Design</p>
+      <footer class='page-footer clearfix'>
+        <p>2021 © Sigma Design</p>
       </footer>
     </div>
 
@@ -333,16 +333,4 @@ export default {
     display: block;
     text-align: center;
   }
-
-  .home-body-footer {
-    padding: 5rem 0px;
-  }
-
-  .home-body-footer > p {
-    display: block;
-    font-weight: 500;
-    margin: 0;
-  }
-
-
 </style>
