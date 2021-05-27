@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const adminRouter = require('./controllers/admin');
 const { loadNuxt, build } = require('nuxt');
 const fileUpload = require('express-fileupload');
+const apiRouter = require('./controllers/api');
 // const authMiddware = require('./middleware/auth');
 
 app.use(bodyParser.json());
@@ -28,7 +29,7 @@ app.get('hello', (req, res) => {
 // app.set('port', port);
 
 // Import API Routes
-// app.use('/api', api);
+app.use('/api/v1', apiRouter);
 app.use('/admin-api', adminRouter);
 // Start nuxt.js
 async function start() {
