@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
-const ProductSchema = require('./proudct.schema');
+const ProductSchema = require('./product.schema');
 const ProductBrandSchema = require('./productBrand.schema');
 const ArticleScheam = require('./article.schema');
 const CarouselSchema = require('./carousel.schema');
 const process = require('process');
 
-mongoose.connect('mongodb://127.0.0.1:27017/furniture', {
+mongoose.connect('mongodb://develop:123456@127.0.0.1:27017/furniture', {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useCreateIndex: true,

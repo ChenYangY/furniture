@@ -25,7 +25,7 @@
 
 <style scoped>
   .about-us-box {
-    margin: 100px 10% 0px 10%
+    margin: 100px 10% 0px 10%;
   }
 </style>
 

@@ -5,7 +5,7 @@ export const state = () => ({
     {key: '_id',label: 'Id'},
     {key: 'name',label: '名称'},
     {key: 'logo',label: 'logo'},
-    {key: 'description',label: '介绍'},
+    // {key: 'description',label: '介绍'},
     {key: 'actions', label: '操作'}
   ],
   brandForm: {
