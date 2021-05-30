@@ -98,6 +98,7 @@
     top: 105px;
     width: 150px;
     height: 150px;
+    z-index: 1000;
   }
   .sub-menu {
     position: absolute;
