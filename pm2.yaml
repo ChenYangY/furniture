@@ -1,0 +1,12 @@
+---
+apps:
+  - name: funiture
+    script: ./server/index.js
+    instances: 1
+    exec_mode: fork
+    merge_logs: true
+    max_memory_restart: 1400M
+    env:
+      PORT: 3005
+      HOST: 0.0.0.0
+      NODE_ENV: production
