@@ -21,7 +21,7 @@
       <div class='sub-menu' v-show="menus.brands.isShow">
         <ul class="sub-menu-list">
           <li v-for="(item, index) in menus.brands.list" :key='index'>
-            <a :href="'products?brand='+item._id">{{item.name}}</a>
+            <a :href="'/products?brand='+item._id">{{item.name}}</a>
           </li>
         </ul>
       </div>

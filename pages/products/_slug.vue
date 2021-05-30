@@ -26,11 +26,11 @@
             <div class='product-detail-property'>
               <div class='product-detail-property-item'>
                 <label>品牌</label>
-                <span>{{(product.brand && product.brarnd.name) || ""}}</span>
+                <span>{{(product.brand && product.brand.name) || ""}}</span>
               </div>
               <div class='product-detail-property-item'>
                 <label>尺寸</label>
-                <span>{{product.demensions || ""}}</span>
+                <span>{{product.dimensions || ""}}</span>
               </div>
               <div class='product-detail-property-item'>
                 <label>材质</label>

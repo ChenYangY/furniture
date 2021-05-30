@@ -74,7 +74,6 @@ export  default  {
   },
   async fetch() {
     let params = {page: this.page, size: this.size};
-    console.log(this.tags);
     if(this.tags) {
       params.tags = this.tags;
     }
@@ -84,7 +83,6 @@ export  default  {
     if(this.brand) {
       params.brand = this.brand;
     }
-    console.log(params);
     let res = await this.$store.dispatch('api/products/index', params);
     let data = res.data;
     this.total = data.count;

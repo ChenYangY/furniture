@@ -22,6 +22,7 @@ async function index(req, res) {
   let docs = await service.findAll(condition, null, {
     skip: (page - 1) * size,
     limit: size,
+    sort: '-create_at'
   });
   let count = await service.count(condition);
   let data = MyUtil.wrapperResponse(null, {

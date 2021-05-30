@@ -11,6 +11,9 @@
             <b-button variant="info" @click="clickCreate">新建</b-button>
           </b-container>
           <b-table :items="datas" :fields="fields" hover striped fixed>
+            <template #cell(brand)="row">
+              {{(row.item.brand && row.item.brand.name) || ''}}
+            </template>
             <template #cell(tags)="row">
               {{row.item.tags.join(',')}}
             </template>
@@ -65,7 +68,7 @@
             ></b-form-input>
           </b-form-group>
           <b-form-group label="品牌" label-for="product_form_brand">
-            <b-select :optioins="brands"></b-select>
+            <b-select :options="brands" v-model="form.brand"></b-select>
           </b-form-group>
           <b-form-group
             label="尺寸"
@@ -173,9 +176,9 @@ export default {
       this.form.name = '';
       this.form.description = '';
       this.form.material = '';
-      this.form.demensions = '';
+      this.form.dimensions = '';
       this.form.tags = [];
-      this.form.models = [];
+      this.form.images = [];
       this.form.title = '新建产品';
       this.form.btnSumitLabel = '创建';
     },
@@ -211,7 +214,14 @@ export default {
       await this.$store.dispatch('admin/products/remove', {id: item._id, idx: index});
       this.$fetch();
     },
-
+  },
+  mounted: async function () {
+    let res = await this.$store.dispatch('api/brands/index', {page: 1, size: 100});
+    if(res.msg !== 'ok') return;
+    let docs = (res.data && res.data.docs) || [];
+    _.each(docs, (item) => {
+      this.brands.push({text: item.name, value: item._id});
+    });
   },
   fetchOnServer: false,
   async fetch() {

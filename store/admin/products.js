@@ -48,7 +48,6 @@ export const mutations = {
   },
   setProductForm(state, data) {
     let fields = ['_id', 'name', 'dimensions', 'description', 'material', 'brand', 'tags', 'images'];
-    console.log(data);
     fields.forEach((field) => {
       state.productForm[field] = data[field];
     });
@@ -59,7 +58,6 @@ export const actions = {
   async create({state}) {
     let fields = ['name', 'dimensions', 'description', 'material', 'brand', 'tags', 'images'];
     let data = _.pick(state.productForm, fields);
-    console.log(data);
     const res = await axios.post(routePath, data);
     return res.data;
   },

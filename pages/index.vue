@@ -100,8 +100,7 @@ export default {
     onSlideEnd() {
       this.sliding = false;
     },
-    showProductMenu(e) {
-      console.log(e);
+    showProductMenu() {
       this.isShowProductMenu = true;
     },
     hideProductMenu() {
