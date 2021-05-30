@@ -59,7 +59,7 @@
       </div>
     </div>
     <footer class='page-footer clearfix'>
-        <p>2021 © Sigma Design</p>
+      <p style='text-align: center;'>2021 © SIGMALIVING 风物宜</p>
     </footer>
   </div>
 </template>

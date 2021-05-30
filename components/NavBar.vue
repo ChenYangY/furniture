@@ -21,13 +21,21 @@
       <div class='sub-menu' v-show="menus.brands.isShow">
         <ul class="sub-menu-list">
           <li v-for="(item, index) in menus.brands.list" :key='index'>
-            <a :href="'product?brand='+item._id">{{item.name}}</a>
+            <a :href="'products?brand='+item._id">{{item.name}}</a>
           </li>
         </ul>
       </div>
     </div>
-    <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'">
-      <a href='#' >公众号</a>
+    <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'"
+      @mouseover="menus.wechatOfficialAccountQrImg.isShow = true"
+      @mouseleave="menus.wechatOfficialAccountQrImg.isShow = false"
+    >
+      <a href='#'>公众号</a>
+      <div v-show="menus.wechatOfficialAccountQrImg.isShow"
+        class="wechat-official-account-qr-img"
+      >
+        <b-img src='/images/wechat_official_account.jpeg' width=150 heigth=150 />
+      </div>
     </div>
     <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'">
       <a href='/about-us' :class="current === '关于我们'? 'active': ''">关于我们</a>
@@ -85,7 +93,12 @@
   .navbar-item-dark .active {
     padding-bottom: 6px;
   }
-
+  .wechat-official-account-qr-img {
+    position: absolute;
+    top: 105px;
+    width: 150px;
+    height: 150px;
+  }
   .sub-menu {
     position: absolute;
     left:0;
@@ -183,6 +196,9 @@ export default {
           list: [],
           isShow: false,
         },
+        wechatOfficialAccountQrImg: {
+          isShow: false,
+        }
       }
     };
   },

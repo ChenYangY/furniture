@@ -25,8 +25,8 @@
       <div class='introduction-area left'>
         <div class='introduction-brand'>关于风物宜</div>
         <div class='introduction-title' style='margin-right:1.5rem;'>品牌全新实验性的产品线。现代简约而不失温度感。</div>
-        <div class='introduction-breif'>有别于延续传统工艺探索的设计，FF系列在设计语言上更为简洁直接， 以多元材质和工艺结合赋予家具更多可能。</div>
-        <div class='introduction-content'>品牌中最早的一条线，关注寻常生活中真实所需的家居设计，简单质朴，在葆有中国的设计语言的基础上，将大自然中的树木变为与家相融的家具，在四季更迭中长久陪伴，慢慢变成我们的家人。</div>
+        <div class='introduction-breif'>sigma取自希腊字母“∑”，意为包涵、包容。旨在以纯粹自然之心面对生活，尊重工艺与品质，探讨产品与使用者之间永恒持续的关系。</div>
+        <div class='introduction-content'>我们专注于经典北欧设计与新北欧设计的家具、灯具品牌，更有家居生活小物，以及价格平易近人的艺术品。基于欧洲零售价的定价，让顾客更轻松地接近美好生活。</div>
         <b-img class='introduction-img' style='float:left;margin-top: 0.75rem;margin-bottom:1.5rem; width: 55.5rem;' src='/images/introduction_img.png' />
         <div>
           <div class='introduction-content' style='margin-right:1.5rem;'>脊线系列的灵感来源于大自然以及儿时记忆，扎根中国传统文化，将更具东方空灵艺术性的元素融合深沉肃穆的设计语言。以螳螂椅为首款产品，历时3年，从设计、结构到工艺，不断推敲升级产品线</div>
@@ -70,7 +70,7 @@
 
       <ProductList />
       <footer class='page-footer clearfix'>
-        <p>2021 © Sigma Design</p>
+        <p style='text-align: center;'>2021 © SIGMALIVING 风物宜</p>
       </footer>
     </div>
 
