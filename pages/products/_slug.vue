@@ -90,6 +90,9 @@
     font-size: 0.8rem;
     line-height: 24px;
   }
+  .product-detail-property-item {
+    max-width: 20rem;
+  }
   .product-detail-property-item > label {
     width: 6rem;
     font-size: 0.9rem;
