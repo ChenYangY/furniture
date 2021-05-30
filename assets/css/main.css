@@ -9,6 +9,10 @@ h2 {
   float: left;
 }
 
+.right {
+  float: right;
+}
+
 .clearfix {
   clear: both;
 }

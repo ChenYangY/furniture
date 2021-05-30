@@ -2,7 +2,7 @@
   <div class='row navbar'>
     <Logo :color= "logoColor" />
     <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'">
-      <a href='#' :class="current === '首页'? 'active':''">首页</a>
+      <a href='/' :class="current === '首页'? 'active':''">首页</a>
     </div>
     <div
       :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'"
@@ -11,7 +11,7 @@
       <div class='sub-menu' v-show="menus.products.isShow">
         <ul class="sub-menu-list">
           <li v-for="(item, index) in menus.products.list" :key='index'>
-            <a href='#'>{{item.label}}</a>
+            <a :href="'/products?tags='+item.label">{{item.label}}</a>
           </li>
         </ul>
       </div>
@@ -21,7 +21,7 @@
       <div class='sub-menu' v-show="menus.brands.isShow">
         <ul class="sub-menu-list">
           <li v-for="(item, index) in menus.brands.list" :key='index'>
-            <a href='#'>{{item.label}}</a>
+            <a :href="'product?brand='+item._id">{{item.name}}</a>
           </li>
         </ul>
       </div>
@@ -30,14 +30,14 @@
       <a href='#' >公众号</a>
     </div>
     <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'">
-      <a href='#' :class="current === '关于我们'? 'active': ''">关于我们</a>
+      <a href='/about-us' :class="current === '关于我们'? 'active': ''">关于我们</a>
     </div>
     <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'">
       <b-input-group class='search'>
         <b-input-group-prepend>
           <b-img src='/images/grey_search.png' />
         </b-input-group-prepend>
-        <b-form-input :change='search' style='border: 0;' placeholder="在此输入搜索内容"/>
+        <b-form-input @change='search($event)' style='border: 0;' type='text' placeholder="在此输入搜索内容"/>
       </b-input-group>
 
     </div>
@@ -50,7 +50,7 @@
 <style scoped>
   .navbar {
     padding: 35px 10% 0 10%;
-    border: 1px solid black;
+    /* border: 1px solid black; */
   }
   .navbar-item-light, .navbar-item-dark {
     padding: 25px 0px;
@@ -189,94 +189,12 @@ export default {
   props: ['logoColor', 'fontColor', 'current'],
   fetchOnServer: false,
   async fetch() {
-    // TODO: add request
-    this.menus.brands.list = [{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    },{
-      label: '宜家'
-    }];
+    let res = await this.$store.dispatch('api/brands/index', {page: 1, size: 30});
+    this.menus.brands.list = res.data.docs || [];
   },
   methods: {
     search(text) {
-      console.log(text);
+      window.location.href = `/products?name=${text}`;
     }
   }
 };

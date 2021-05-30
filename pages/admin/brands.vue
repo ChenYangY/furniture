@@ -161,7 +161,8 @@ export default {
         if(uploadRes.code !== 0) {
           return ;
         }
-        data.logo = `${window.location.origin}${uploadRes.data.path}`;
+        // data.logo = `${window.location.origin}${uploadRes.data.path}`;
+        data.logo = uploadRes.data.path;
       }
       else {
         data.logo = this.form.logo;

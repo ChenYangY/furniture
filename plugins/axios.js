@@ -6,4 +6,5 @@ let options = {};
 //   options.baseURL = `http://${process.env.HOST || '127.0.0.1'}:${process.env.PORT || 3005}`
 // }
 options.baseURL = 'http://localhost:3005/';
+axios.defaults.withCredentials = true;
 export default axios.create(options);

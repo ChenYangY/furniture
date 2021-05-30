@@ -7,8 +7,9 @@ const productController = require('./products.controller');
 const productBrandController = require('./proudctBrands.controller');
 const carouselsController = require('./carousels.controller');
 const fileController = require('./file.controller');
+const auth = require('../../middleware/auth');
 
-
+router.use(auth);
 function addResourceRoute(urlPath, router, controllerInst) {
   router.get(`/${urlPath}`, function(req, res) {
     controllerInst.index(req, res);

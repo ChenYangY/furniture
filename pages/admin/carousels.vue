@@ -175,9 +175,9 @@ export default {
         console.log(body.msg);
         return;
       }
-      let origin = window.location.origin;
+      // let origin = window.location.origin;
       this.carouselForm.images.push({
-        url: `${origin}${body.data.path}`,
+        url: `${body.data.path}`,
         redirect: this.carouselForm.redirect,
       });
 

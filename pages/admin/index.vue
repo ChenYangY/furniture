@@ -1,13 +1,13 @@
 <template>
-  <b-container fluid>
-    <b-form @submit="onSubmit" style='margin-top: 260px;'>
-      <b-input-group class="mb-3">
+  <b-container>
+    <b-form @submit="onSubmit" style='margin-top: 260px; width: 300px; margin-left: 30%;'>
+      <b-input-group class="mb-3 md-3">
         <b-input-group-prepend is-text>
           <b-icon icon="person-fill"></b-icon>
         </b-input-group-prepend>
         <b-form-input type="text" placeholder="用户名" v-model="username"></b-form-input>
       </b-input-group>
-      <b-input-group class="mb-3 md-4">
+      <b-input-group class="mb-3">
         <b-input-group-prepend is-text>
           <b-icon icon="key-fill"></b-icon>
         </b-input-group-prepend>
@@ -30,9 +30,12 @@ export default {
     };
   },
   methods: {
-    onSubmit(event) {
+    async onSubmit(event) {
       event.preventDefault();
-      console.log(this.username, this.password);
+      let isLogin = await this.$store.dispatch('login', { username: this.username, password: this.password});
+      if(isLogin) {
+        window.location.href = '/admin/brands';
+      }
     }
   }
 };

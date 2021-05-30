@@ -88,63 +88,8 @@
           </div>
         </div>
       </div>
-      <div class='product-list-area left'>
-        <div class='product-list-area-item left'>
-          <b-img src='/images/product-cover-1.png' />
-          <div class='product-list-area-item-info clearfix'>
-            <div class='product-list-area-item-info-title left'>崭新开端</div>
-            <b-link class='product-list-area-item-info-link left' src='#'>
-                <b-img style='with: 100%; height: 100%;' src='/images/arrow-right.png' />
-            </b-link>
-          </div>
-        </div>
-        <div class='product-list-area-item left'>
-          <b-img src='/images/product-cover-1.png' />
-          <div class='product-list-area-item-info clearfix'>
-            <div class='product-list-area-item-info-title left'>崭新开端</div>
-            <b-link class='product-list-area-item-info-link left' src='#'>
-                <b-img style='with: 100%; height: 100%;' src='/images/arrow-right.png' />
-            </b-link>
-          </div>
-        </div>
-        <div class='product-list-area-item left'>
-          <b-img src='/images/product-cover-1.png' />
-          <div class='product-list-area-item-info clearfix'>
-            <div class='product-list-area-item-info-title left'>崭新开端</div>
-            <b-link class='product-list-area-item-info-link left' src='#'>
-                <b-img style='with: 100%; height: 100%;' src='/images/arrow-right.png' />
-            </b-link>
-          </div>
-        </div>
-        <div class='product-list-area-item left'>
-          <b-img src='/images/product-cover-1.png' />
-          <div class='product-list-area-item-info clearfix'>
-            <div class='product-list-area-item-info-title left'>崭新开端</div>
-            <b-link class='product-list-area-item-info-link left' src='#'>
-                <b-img style='with: 100%; height: 100%;' src='/images/arrow-right.png' />
-            </b-link>
-          </div>
-        </div>
-        <div class='product-list-area-item left'>
-          <b-img src='/images/product-cover-1.png' />
-          <div class='product-list-area-item-info clearfix'>
-            <div class='product-list-area-item-info-title left'>崭新开端</div>
-            <b-link class='product-list-area-item-info-link left' src='#'>
-                <b-img style='with: 100%; height: 100%;' src='/images/arrow-right.png' />
-            </b-link>
-          </div>
-        </div>
-        <div class='product-list-area-item left'>
-          <b-img src='/images/product-cover-1.png' />
-          <div class='product-list-area-item-info clearfix'>
-            <div class='product-list-area-item-info-title left'>崭新开端</div>
-            <b-link class='product-list-area-item-info-link left' src='#'>
-                <b-img style='with: 100%; height: 100%;' src='/images/arrow-right.png' />
-            </b-link>
-          </div>
-        </div>
-        <div class='product-list-area-item-more left'><b-link src='#'>查看更多</b-link></div>
-      </div>
+
+      <ProductList />
       <footer class='page-footer clearfix'>
         <p>2021 © Sigma Design</p>
       </footer>
@@ -155,9 +100,11 @@
 
 <script>
 import NavBar from '../components/NavBar';
+import ProductList from '../components/ProductList';
 export default {
   components: {
-    NavBar
+    NavBar,
+    ProductList
   },
   data() {
     return {

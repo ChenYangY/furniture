@@ -9,6 +9,7 @@ var router = Router();
 
 
 router.get('/products', productController.index);
+router.get('/products/:id', productController.show);
 router.get('/brands', brandController.index);
 router.get('/carousels', carouselController.index);
 

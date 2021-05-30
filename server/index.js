@@ -4,14 +4,20 @@ const process = require('process');
 const host = process.env.HOST || '127.0.0.1';
 const port = process.env.PORT || 3005;
 const bodyParser = require('body-parser');
+const session = require('express-session')
 const adminRouter = require('./controllers/admin');
 const { loadNuxt, build } = require('nuxt');
 const fileUpload = require('express-fileupload');
 const apiRouter = require('./controllers/api');
-// const authMiddware = require('./middleware/auth');
+const loginContoller = require('./controllers/login');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use((session({
+  secret: 'furniture',
+  resave: false,
+  saveUninitialized: true,
+})));
 app.use(fileUpload({
   limits: { fileSize: 5 * 1024 * 1024 },
   limitHandler: function(req, res) {
@@ -26,11 +32,15 @@ app.get('hello', (req, res) => {
   res.end('hello');
 });
 
+
 // app.set('port', port);
 
 // Import API Routes
 app.use('/api/v1', apiRouter);
 app.use('/admin-api', adminRouter);
+app.post('/login', loginContoller.login);
+
+
 // Start nuxt.js
 async function start() {
   // Import and Set Nuxt.js options

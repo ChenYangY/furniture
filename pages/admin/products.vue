@@ -152,8 +152,8 @@ export default {
       this.form.images.splice(index, 1);
     },
     addFormImage(path) {
-      const url = `${window.location.origin}${path}`;
-      this.form.images.push(url);
+      // const url = `${window.location.origin}${path}`;
+      this.form.images.push(path);
     },
     changePage(curPage) {
       this.$route.query.page = curPage;
