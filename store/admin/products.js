@@ -1,4 +1,4 @@
-import axios from '../../plugins/axios';
+import axios from 'axios';
 import _ from 'lodash';
 const routePath = 'admin-api/products';
 export const state = () => ({
