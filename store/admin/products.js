@@ -1,6 +1,6 @@
 import axios from 'axios';
 import _ from 'lodash';
-const routePath = 'admin-api/products';
+const routePath = '/admin-api/products';
 export const state = () => ({
   datas: [],
   total: 0,
