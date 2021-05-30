@@ -15,30 +15,9 @@
         @sliding-start="onSlideStart"
         @sliding-end="onSlideEnd"
         >
-          <b-carousel-slide
-            img-src="https://picsum.photos/1024/480/?image=52"
-          ></b-carousel-slide>
-
-          <!-- Slides with custom text -->
-          <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=54">
-          </b-carousel-slide>
-
-          <!-- Slides with image only -->
-          <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=58"></b-carousel-slide>
-
-          <!-- Slides with img slot -->
-          <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
-          <b-carousel-slide>
-            <template #img>
-              <img
-                class="d-block img-fluid w-100"
-                width="1024"
-                height="480"
-                src="https://picsum.photos/1024/480/?image=55"
-                alt="image slot"
-              >
-            </template>
-          </b-carousel-slide>
+          <b-carousel-slide v-for="(image, index) in carousel.images" :key="index"
+            :img-src="image.url"
+          />
         </b-carousel>
       </div>
     </div>
@@ -110,7 +89,8 @@ export default {
     return {
       slide: 0,
       sliding: null,
-      isShowProductMenu: false
+      isShowProductMenu: false,
+      carousel: {images: []},
     };
   },
   methods: {
@@ -127,6 +107,14 @@ export default {
     hideProductMenu() {
       this.isShowProductMenu = false;
 
+    }
+  },
+  fetchOnServer: false,
+  async fetch() {
+    let res = await this.$store.dispatch('api/carousels/index', {page: 1, size: 20});
+    let carousel = res.data.docs[0];
+    if(carousel && carousel.images.length > 0) {
+      this.carousel = carousel;
     }
   }
 };
