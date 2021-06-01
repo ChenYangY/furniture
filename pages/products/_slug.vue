@@ -2,7 +2,7 @@
   <div>
     <NavBar logoColor='black' style='color: black;' fontColor="black"/>
     <div class='product-box clearfix'>
-      <div class='product-detail'>
+      <div class='product-box-body clearfix'>
         <div class='product-box-carousel left'>
           <b-carousel
             indicators
@@ -70,10 +70,20 @@
   .product-box-carousel {
     width: 27rem;
     height: 30rem;
+    margin-right: 6rem;
   }
-  .product-detail-box {
+
+  .carousel-item {
+    width: 27rem;
+    height: 30rem;
+  }
+  .product-box-body {
+    margin-bottom: 5rem;
+  }
+
+  /* .product-detail-box {
     margin-left: 6rem;
-  }
+  } */
 
   .product-detail-box > label {
     font-size: 0.8rem;
