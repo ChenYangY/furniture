@@ -88,7 +88,7 @@
           >
             <TagInput :tags="form.tags" @delete='delTag' @add="addTag"/>
           </b-form-group>
-          <ImageInput :images="form.images" @del="delFormImage" @add='addFormImage'/>
+          <ImageInput :images="form.images" @del="delFormImage" @add='addFormImages'/>
           <b-form-group label="介绍" label-for="brand_form_description">
             <b-form-textarea id='brand_form_description'
               v-model="form.description"
@@ -154,9 +154,9 @@ export default {
     delFormImage(index) {
       this.form.images.splice(index, 1);
     },
-    addFormImage(path) {
+    addFormImages(paths) {
       // const url = `${window.location.origin}${path}`;
-      this.form.images.push(path);
+      this.form.images = this.form.images.concat(paths);
     },
     changePage(curPage) {
       this.$route.query.page = curPage;

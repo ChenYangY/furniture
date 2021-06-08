@@ -157,12 +157,12 @@ export default {
         description: this.form.description,
       };
       if(!this.form.logo) {
-        const uploadRes = await this.$store.dispatch('admin/upload', this.form.file);
+        const uploadRes = await this.$store.dispatch('admin/upload', [this.form.file]);
         if(uploadRes.code !== 0) {
           return ;
         }
         // data.logo = `${window.location.origin}${uploadRes.data.path}`;
-        data.logo = uploadRes.data.path;
+        data.logo = uploadRes.data.paths[0];
       }
       else {
         data.logo = this.form.logo;

@@ -170,14 +170,14 @@ export default {
       }
     },
     async addImageItem() {
-      let body = await this.$store.dispatch('admin/upload', this.carouselForm.file);
+      let body = await this.$store.dispatch('admin/upload', [this.carouselForm.file]);
       if(body.code !== 0) {
         console.log(body.msg);
         return;
       }
       // let origin = window.location.origin;
       this.carouselForm.images.push({
-        url: `${body.data.path}`,
+        url: `${body.data.paths[0]}`,
         redirect: this.carouselForm.redirect,
       });
 

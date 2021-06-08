@@ -4,7 +4,7 @@ const process = require('process');
 const host = process.env.HOST || '127.0.0.1';
 const port = process.env.PORT || 3005;
 const bodyParser = require('body-parser');
-const session = require('express-session')
+const session = require('express-session');
 const adminRouter = require('./controllers/admin');
 const { loadNuxt, build } = require('nuxt');
 const fileUpload = require('express-fileupload');
@@ -19,7 +19,7 @@ app.use((session({
   saveUninitialized: true,
 })));
 app.use(fileUpload({
-  limits: { fileSize: 5 * 1024 * 1024 },
+  limits: { fileSize: 50 * 1024 * 1024 },
   limitHandler: function(req, res) {
     res.json({
       msg: '文件太大了',

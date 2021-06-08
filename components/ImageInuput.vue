@@ -12,7 +12,8 @@
     <b-form-file
       id='product_form_images'
       placeholder="点击添加"
-      v-model="file"
+      v-model="files"
+      multiple
       @change="add"
     ></b-form-file>
   </b-form-group>
@@ -29,7 +30,7 @@
 <script>
 export default {
   data() {
-    return {file: null};
+    return {files: []};
   },
   props: {
     images: Array,
@@ -40,9 +41,9 @@ export default {
     },
     async add(event) {
       if(!event.target.files[0]) return;
-      const response = await this.$store.dispatch('admin/upload', event.target.files[0]);
-      this.$emit('add', response.data.path);
-      this.file = null;
+      const response = await this.$store.dispatch('admin/upload', event.target.files);
+      this.$emit('add', response.data.paths);
+      this.files = [];
 
     }
   }
