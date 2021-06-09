@@ -11,12 +11,26 @@
       <div class='sub-menu' v-show="menus.products.isShow">
         <ul class="sub-menu-list">
           <li v-for="(item, index) in menus.products.list" :key='index'>
-            <a :href="'/products?tags='+item.label">{{item.label}}</a>
+            <a
+              :href="'/products?tags='+ item.label"
+              @mouseover="childMenu=item.children;childMenuTitle=item.label;"
+            >{{item.label}}</a>
           </li>
         </ul>
+        <div v-show="childMenu.length > 0"
+          class='navbar-child-menu'
+        >
+          <label>{{childMenuTitle}}:</label>
+          <ul>
+            <li v-for="(child, childIdx) in childMenu" :key="childIdx">
+              <a :href="'/products?tags='+ child.label">{{child.label}}</a>
+            </li>
+          </ul>
+        </div>
+
       </div>
     </div>
-    <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'" @mouseover="menus.brands.isShow=true" @mouseleave="menus.brands.isShow=false">
+    <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'" @mouseover="menus.brands.isShow=true" @mouseleave="menus.brands.isShow=false; childMenu=[];">
       <a href='#'>品牌</a>
       <div class='sub-menu' v-show="menus.brands.isShow">
         <ul class="sub-menu-list">
@@ -92,6 +106,9 @@
 
   .navbar-item-dark .active {
     padding-bottom: 6px;
+    text-decoration-line: none;
+    padding-bottom: 6px;
+    border-bottom: 2px solid black;
   }
   .wechat-official-account-qr-img {
     position: absolute;
@@ -127,7 +144,8 @@
 
   .sub-menu-list > li {
     display: inline-block;
-    width: 7rem;
+    /* width: 7rem; */
+    padding: 0 1.5rem;
     margin-top: 0.5rem;
   }
 
@@ -165,7 +183,26 @@
     border-top: 2px solid black;
     border-bottom: 2px solid black;
   }
+  .navbar-child-menu {
+    width: 80%;
+    margin-top: 1rem;
+    margin: 0 10%;
+  }
+  .navbar-child-menu > label{
+    font-weight: 500;
+    padding-left: 1.5rem;
+  }
+  .navbar-child-menu > ul {
+    list-style: none;
 
+  }
+  .navbar-child-menu > ul > li {
+    display: inline-block;
+    padding: 0 1rem;
+  }
+  .navbar-child-menu > ul > li > a {
+    color: black;
+  }
 </style>
 <script>
 import Logo from '../components/Logo';
@@ -180,16 +217,60 @@ export default {
         products: {
           list: [{
             label: '新品',
+            children: [],
           }, {
             label: '设计家具',
+            children: [],
           },{
             label: '家具',
+            isShow: false,
+            children: [{
+              label: '椅'
+            },{
+              label: '休闲椅'
+            },{
+              label: '桌'
+            }, {
+              label: '茶几'
+            },{
+              label: '书桌'
+            },{
+              label: '架'
+            },{
+              label: '床'
+            },{
+              label: '床头柜'
+            }]
           },{
             label: '灯具',
+            isShow: false,
+            children: [{
+              label: '台灯'
+            },{
+              label: '壁灯'
+            },{
+              label: '顶灯'
+            }]
           },{
             label: '生活家居',
+            isShow: false,
+            children: [{
+              label: '蜡烛香氛'
+            },{
+              label: '毯'
+            },{
+              label: '其他家居'
+            },]
           },{
-            label: '艺术及及印刷品'
+            label: '艺术及及印刷品',
+            isShow: false,
+            children: [{
+              label: '艺术品'
+            },{
+              label: '印刷画'
+            },{
+              label: '画框'
+            }]
           }],
           isShow: false,
         },
@@ -200,7 +281,9 @@ export default {
         wechatOfficialAccountQrImg: {
           isShow: false,
         }
-      }
+      },
+      childMenu: [],
+      childMenuTitle: '',
     };
   },
   props: ['logoColor', 'fontColor', 'current'],
