@@ -52,4 +52,19 @@ html, body {
     font-size: 16px !important;
     line-height: 24px;
   }
+  .carousel-box {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+@media only screen and (max-width: 720px){
+  html {
+    font-size: 14px !important;
+    line-height: 18px;
+  }
+  .product-list-item {
+    width: 50% !important;
+    padding: 0 5px !important;
+  }
 }

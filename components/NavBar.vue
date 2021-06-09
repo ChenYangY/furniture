@@ -26,7 +26,7 @@
         </ul>
       </div>
     </div>
-    <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'"
+    <!-- <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'"
       @mouseover="menus.wechatOfficialAccountQrImg.isShow = true"
       @mouseleave="menus.wechatOfficialAccountQrImg.isShow = false"
     >
@@ -36,7 +36,7 @@
       >
         <b-img src='/images/wechat_official_account.jpeg' width=150 heigth=150 />
       </div>
-    </div>
+    </div> -->
     <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'">
       <a href='/about-us' :class="current === '关于我们'? 'active': ''">关于我们</a>
     </div>
