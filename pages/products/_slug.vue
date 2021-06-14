@@ -11,8 +11,17 @@
             <b-carousel-slide
                 v-show="product.images && product.images.length > 0"
                 v-for="(image,index) in product.images" :key="index"
-                :img-src="image"
-              ></b-carousel-slide>
+                img-height=600
+                img-width=540
+              >
+                <template #img>
+                  <b-img
+                    class="d-block img-fluid w-100 product-img"
+                    :src="image"
+                    alt="image slot"
+                  />
+                </template>
+              </b-carousel-slide>
               <b-carousel-slide
                 v-if="!product.images || product.images.length <= 0"
                 img-src="/images/default_product.png"
@@ -65,7 +74,10 @@
   </div>
 </template>
 <style scoped>
-
+  .product-img {
+    width: 27rem;
+    height: 30rem;
+  }
   .product-box {
     margin: 80px 10% 0px 10%;
   }

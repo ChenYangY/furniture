@@ -3,7 +3,7 @@ import _ from 'lodash';
 const routePath = '/admin-api/products';
 export const state = () => ({
   datas: [],
-  total: 0,
+  totalRows: 0,
   fields: [
     // {key: '_id',label: 'Id'},
     {key: 'name',label: '名称'},
@@ -51,6 +51,9 @@ export const mutations = {
     fields.forEach((field) => {
       state.productForm[field] = data[field];
     });
+  },
+  batchImport() {
+    console.log('batch-import zip file');
   }
 };
 
@@ -82,6 +85,12 @@ export const actions = {
     const res = await axios.get(`${routePath}?page=${page}&size=${size}&sort=${sort}`);
     commit('index', res.data.data);
     return res.data;
+  },
+  async batchImport({commit}, file) {
+    let form = new FormData();
+    form.append('file', file);
+    await axios.post(`${routePath}/batch-import`, form);
+    commit('batchImport');
   }
 };
 

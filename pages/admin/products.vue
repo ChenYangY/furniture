@@ -9,6 +9,7 @@
        <b-col>
           <b-container fluid style='margin: 10px; text-align: right;'>
             <b-button variant="info" @click="clickCreate">新建</b-button>
+            <b-button variant="info" @click="showBatchImportForm">批量导入</b-button>
           </b-container>
           <b-table :items="datas" :fields="fields" hover striped fixed>
             <template #cell(brand)="row">
@@ -104,6 +105,24 @@
           </b-button>
         </template>
       </b-modal>
+      <b-modal id="product_batch_import_modal" title="批量导入产品"  size="xl" @ok="submitBatchForm()">
+        <b-input-group
+          prepend="请选择文件"
+        >
+          <b-form-file
+            id='batch_import_file'
+            accept=".zip"
+            v-model="batch_import_file" />
+        </b-input-group>
+        <template #modal-footer="{ ok, cancel }">
+          <b-button size="sm" variant="info" @click="ok()">
+            确定
+          </b-button>
+          <b-button size="sm" variant="danger" @click="cancel()">
+            取消
+          </b-button>
+        </template>
+      </b-modal>
     </b-container>
   </div>
 </template>
@@ -137,6 +156,7 @@ export default {
         brand: null,
         file: null,
       },
+      batch_import_file: null,
     };
   },
   computed: mapState({
@@ -180,6 +200,7 @@ export default {
       this.form.tags = [];
       this.form.images = [];
       this.form.title = '新建产品';
+      this.form.brand = '';
       this.form.btnSumitLabel = '创建';
     },
     updateForm(item) {
@@ -192,6 +213,7 @@ export default {
       this.form.dimensions = item.dimensions;
       this.form.tags = item.tags;
       this.form.images = item.images;
+      this.form.brand = item.brand._id;
     },
     async submitForm() {
       const fields = [
@@ -214,6 +236,14 @@ export default {
       await this.$store.dispatch('admin/products/remove', {id: item._id, idx: index});
       this.$fetch();
     },
+    showBatchImportForm() {
+      this.batch_import_file = null;
+      this.$bvModal.show('product_batch_import_modal');
+    },
+    async submitBatchForm() {
+      await this.$store.dispatch('admin/products/batchImport', this.batch_import_file);
+      this.$fetch();
+    }
   },
   mounted: async function () {
     let res = await this.$store.dispatch('api/brands/index', {page: 1, size: 100});
