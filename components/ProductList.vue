@@ -32,10 +32,12 @@
   }
   .product-list-item img {
      width: 100%;
-     max-height: 500px;
+     height: 500px;
   }
   .product-list-item > a {
     color: black;
+    display: block !important;
+    float: left;
   }
 
   .product-list-item > a:hover {
@@ -46,6 +48,7 @@
     font-size: 1.2rem;
     line-height: 1.8rem;
     margin: 1rem 0;
+    height: 4rem;
   }
   .product-load-more {
     border-radius: 5px;

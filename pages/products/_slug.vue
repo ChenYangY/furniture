@@ -6,6 +6,7 @@
         <div class='product-box-carousel left'>
           <b-carousel
             indicators
+            controls
           >
             <b-carousel-slide
                 v-show="product.images && product.images.length > 0"
@@ -64,6 +65,7 @@
   </div>
 </template>
 <style scoped>
+
   .product-box {
     margin: 80px 10% 0px 10%;
   }
