@@ -28,7 +28,12 @@ function addResourceRoute(urlPath, router, controllerInst) {
   });
 }
 // Add product routes
+router.post('/products/batch-import', function(req, res) {
+  productController.batchImport(req, res);
+});
 addResourceRoute('products', router, productController);
+
+
 
 // Add product-brand routes
 addResourceRoute('product-brands', router, productBrandController);

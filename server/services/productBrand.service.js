@@ -6,6 +6,10 @@ class ProductBrandService extends CRUDService {
   getModel() {
     return models.productBrandModel;
   }
+
+  findByName(name) {
+    return this.getModel().find({name});
+  }
 }
 
 module.exports = ProductBrandService;

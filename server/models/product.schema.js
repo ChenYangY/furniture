@@ -12,6 +12,7 @@ const ProductSchema = new Schema({
   brand: {type: Schema.Types.ObjectId, comment: '品牌', ref: 'ProductBrand', autopopulate: true},
   material: {type: String, comment: '材料', default: ''},
   dimensions: {type: String, comment: '尺寸', default: ''},
+  weight: {type: String, comment: '重量'},
   description: {type: String, comment: '详细说明', default: ''},
   images: [{type: String}]
 }, {

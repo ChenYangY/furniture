@@ -2,6 +2,7 @@ const _ = require('lodash');
 const fs = require('fs');
 const path = require('path');
 const MyUtil = require('../../common/myutil');
+const FileService = require('../../services/file.service');
 class AdminFileController {
   upload(req, res) {
     const files = req.files || {};
@@ -11,23 +12,23 @@ class AdminFileController {
     }
     let keys = Object.keys(req.files);
     let paths = [];
+    let errorFiles = [];
     _.each(keys, (key) => {
       let file = req.files[key];
-      const md5Val = file.md5;
-      const basePath = '../../../static/upload';
-      const dirPath = path.join(basePath, md5Val.slice(0,2), md5Val.slice(-2));
-      const filePath = `${dirPath}/${md5Val}${path.extname(file.name)}`;
-      // eslint-disable-next-line no-undef
-      const absoluteDirPath = path.join(__dirname, dirPath);
-      let result= MyUtil.mkdir(absoluteDirPath);
-      if(result.status !== 0) {
-        res.json(MyUtil.wrapperResponse('文件存储失败'));
-        return;
+      const basePath = '../../static/upload';
+      try {
+        let visitPath = FileService.storageFile({data:file.data, name: file.name}, basePath, {md5Val: file.md5});
+        paths.push(visitPath);
+      } catch (e) {
+        // TODO: maybe need to rollback
+        console.log(e.stack);
+        errorFiles.push(file);
       }
-      // eslint-disable-next-line no-undef
-      fs.writeFileSync(path.join(__dirname, filePath), file.data);
-      paths.push(`/upload${filePath.replace(basePath, '')}`);
     });
+    if(errorFiles.length > 0) {
+      res.json(MyUtil.wrapperResponse('文件存储失败'));
+      return;
+    }
     res.json(MyUtil.wrapperResponse('', {paths: paths}));
   }
 }
