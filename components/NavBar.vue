@@ -216,60 +216,64 @@ export default {
       menus: {
         products: {
           list: [{
-            label: '新品',
+            label: '新品 New',
             children: [],
           }, {
-            label: '设计家具',
+            label: 'Art Design 设计家具 ',
             children: [],
           },{
-            label: '家具',
+            label: 'Furniture 家具',
             isShow: false,
             children: [{
-              label: '椅'
+              label: 'Chair 椅'
             },{
-              label: '休闲椅'
+              label: 'Lounge 休闲椅'
             },{
-              label: '桌'
+              label: 'Sofa 沙发'
             }, {
-              label: '茶几'
+              label: 'Table 桌'
+            }, {
+              label: 'Coffe Table 茶几'
             },{
-              label: '书桌'
+              label: 'Desk 书桌'
             },{
-              label: '架'
+              label: 'Storage 柜'
+            }, {
+              label: 'Shelf 架'
             },{
-              label: '床'
+              label: 'Bed 床'
             },{
-              label: '床头柜'
+              label: 'Night Table 床头柜'
             }]
           },{
-            label: '灯具',
+            label: 'Lighting 灯具',
             isShow: false,
             children: [{
-              label: '台灯'
+              label: 'Table Lamp 台灯'
             },{
-              label: '壁灯'
+              label: 'Wall Lamp 壁灯'
             },{
-              label: '顶灯'
+              label: 'Celling Lamp 顶灯'
             }]
           },{
-            label: '生活家居',
+            label: 'Life Style 生活家居',
             isShow: false,
             children: [{
-              label: '蜡烛香氛'
+              label: 'Candle 蜡烛香氛'
             },{
-              label: '毯'
+              label: 'Rug 毯'
             },{
-              label: '其他家居'
+              label: 'Accessories 其他家居'
             },]
           },{
-            label: '艺术及及印刷品',
+            label: 'Arts&Prints 艺术及及印刷品',
             isShow: false,
             children: [{
-              label: '艺术品'
+              label: 'Arts 艺术品'
             },{
-              label: '印刷画'
+              label: 'Prints 印刷画'
             },{
-              label: '画框'
+              label: 'Frame 画框'
             }]
           }],
           isShow: false,
