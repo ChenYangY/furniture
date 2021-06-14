@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NavBar  logoColor='black' style='color: black;' fontColor="black"/>
+    <NavBar  logoColor='black' style='color: black;' fontColor="black" current="产品"/>
     <div>
       <div class='product-all-box'>
         <div class='clearfix product-all-box-navbar'>

@@ -4,12 +4,12 @@
       <div
         v-for="(product, index) in list"
         :key="index"
-        :class="'product-list-item left '+ (index%2 == 0?'item-margin': '')"
+        class="product-list-item"
       >
         <b-link :href="'/products/' + product._id">
-          <b-img :src="product.images[0]" v-if="product && product.images[0]" width=540 heigth=400 />
-          <b-img src="/images/default_product.png" v-if="!product || !product.images[0]" width=540 heigth=400 />
-          <div class='product-list-item-name'>{{product.name}}</div>
+          <b-img :src="product.images[0]" v-if="product && product.images[0]" />
+          <b-img src="/images/default_product.png" v-if="!product || !product.images[0]"/>
+          <p class='product-list-item-name'>{{product.name}}</p>
         </b-link>
       </div>
       <div v-if="total === 0" style='width: 100%; heigth: 25rem; margin-top: 10rem;'>
@@ -25,10 +25,14 @@
   .item-margin {
     margin-right: 1.5rem;
   }
-
+  .product-list-item {
+    width: 25%;
+    padding: 0 10px;
+    display: inline-block;
+  }
   .product-list-item img {
-    width: 27rem;
-    height: 20rem;
+     width: 100%;
+     max-height: 500px;
   }
   .product-list-item > a {
     color: black;
