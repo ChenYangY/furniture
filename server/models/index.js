@@ -5,7 +5,7 @@ const ArticleScheam = require('./article.schema');
 const CarouselSchema = require('./carousel.schema');
 const process = require('process');
 
-mongoose.connect('mongodb://develop:123456@127.0.0.1:27017/furniture', {
+mongoose.connect('mongodb://fengshows:fengshows@127.0.0.1:27016/furniture', {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useCreateIndex: true,

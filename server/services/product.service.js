@@ -56,7 +56,7 @@ class ProudctService extends CRUDService {
       let doc = {images: [], tags: []};
       let brands = await brandService.findByName(record.brand);
       if(brands <= 0) {
-        let brandDoc = await brandService.updateOne({
+        let brandDoc = await brandService.getModel().updateOne({
           name: record.brand,
         }, {name: record.brand}, {upsert: true});
         doc.brand = brandDoc._id;
