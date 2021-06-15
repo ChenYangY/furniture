@@ -6,9 +6,9 @@
         <div class='clearfix product-all-box-navbar'>
           <div class='product-all-title left'>全部产品</div>
           <div class='right product-all-item'>
-            <b-link href="/products?tags=新品">新品</b-link>
-            <b-link href="/products?tags=家居">家居</b-link>
-            <b-link href="/products?tags=灯具">灯具</b-link>
+            <b-link href="/products?tags=新品 New">新品</b-link>
+            <b-link href="/products?tags=Lifestyle 生活家居">家居</b-link>
+            <b-link href="/products?tags=Lighting 灯">灯具</b-link>
           </div>
         </div>
         <p>品牌中最早的一条线，关注寻常生活中真实所需的家居设计简单质朴。</p>

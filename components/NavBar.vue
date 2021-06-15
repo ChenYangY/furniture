@@ -246,7 +246,7 @@ export default {
               label: 'Night Table 床头柜'
             }]
           },{
-            label: 'Lighting 灯具',
+            label: 'Lighting 灯',
             isShow: false,
             children: [{
               label: 'Table Lamp 台灯'
@@ -254,9 +254,11 @@ export default {
               label: 'Wall Lamp 壁灯'
             },{
               label: 'Ceiling Lamp 顶灯'
+            }, {
+              label: 'Standing Lamp 落地灯'
             }]
           },{
-            label: 'Life Style 生活家居',
+            label: 'Lifestyle 生活家居',
             isShow: false,
             children: [{
               label: 'Candle 蜡烛香氛'
