@@ -233,7 +233,7 @@ export default {
             }, {
               label: 'Table 桌'
             }, {
-              label: 'Coffe Table 茶几'
+              label: 'Coffee Table 茶几'
             },{
               label: 'Desk 书桌'
             },{
@@ -253,7 +253,7 @@ export default {
             },{
               label: 'Wall Lamp 壁灯'
             },{
-              label: 'Celling Lamp 顶灯'
+              label: 'Ceiling Lamp 顶灯'
             }]
           },{
             label: 'Life Style 生活家居',
