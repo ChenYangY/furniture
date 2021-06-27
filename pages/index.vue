@@ -84,6 +84,23 @@ export default {
 
 
 <style>
+  @media only screen and (max-width: 800px) {
+    .home-body {
+      padding: 1rem !important;
+    }
+    .introduction-area {
+      padding: 0 !important;
+    }
+
+    .introduction-area {
+      padding: 0 !important;
+    }
+    .product-area {
+      padding: 0 !important;
+    }
+
+  }
+
   .carousel-box {
     padding: 2.5rem 14% 7rem 14%;
   }

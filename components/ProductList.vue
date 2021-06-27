@@ -21,7 +21,7 @@
     </p>
   </div>
 </template>
-<style scoped>
+<style scoped>  
   .item-margin {
     margin-right: 1.5rem;
   }

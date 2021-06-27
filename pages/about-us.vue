@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div fluid style='padding: 0px;overflow-x:hidden;'>
     <NavBar logoColor='black' style='color: black;' current="关于我们" fontColor="black"/>
     <div class='about-us-box'>
       <div class='clearfix'>
-        <div style='margin-bottom: 1.5rem;font-weight: 400;'>关于我们</div>
-        <div class='left' style='max-width: 30rem;margin-right: 4rem;margin-bottom: 1.5rem;'>
-          <h2 style='font-size: 3rem;margin-bottom:1rem;'>SIGMALIVING 风物宜</h2>
-          <p style='color:#777777;'>关于风物宜：SIGMA取自希腊字母“∑”，意为包涵、包容。旨在以纯粹自然之心面对生活，尊重工艺与品质，探讨产品与使用者之间永恒持续的关系。</p>
+        <div class='about-us-title'>关于我们</div>
+        <div class='left about-us-introduction'>
+          <h2 class='about-us-introduction-title'>SIGMALIVING 风物宜</h2>
+          <p>SIGMA取自希腊字母“∑”，意为包涵、包容。旨在以纯粹自然之心面对生活，尊重工艺与品质，探讨产品与使用者之间永恒持续的关系。</p>
           <p style='color:#777777;'>我们专注于经典北欧设计与新北欧设计的家具、灯具品牌，更有家居生活小物，以及价格平易近人的艺术品。基于欧洲零售价的定价，让顾客更轻松地接近美好生活。</p>
         </div>
         <div class='left' style='max-width: 21rem;margin-left: 1rem;'>
@@ -30,8 +30,47 @@ SIGMALIVING 风物宜</p></div>
 </template>
 
 <style scoped>
+  @media only screen and (max-width: 800px) {
+    .about-us-box {
+      padding: 2rem 1rem;
+      margin: 0 !important;
+    }
+
+    .about-us-title {
+      font-size: 1.2rem;
+    }
+    .about-us-introduction {
+      width: 100%;
+    }
+
+    .about-us-introduction-title {
+      width: 100%;
+      font-size: 2rem !important;
+
+    }
+
+  }
   .about-us-box {
     margin: 100px 10% 0px 10%;
+  }
+
+  .about-us-title {
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+  }
+
+  .about-us-introduction {
+    max-width: 30rem;
+    margin-right: 4rem;
+    margin-bottom: 1.5rem;
+  }
+  .about-us-introduction > p {
+    color:#777777;
+  }
+
+  .about-us-introduction-title {
+    font-size: 3rem;
+    margin-bottom:1rem;
   }
 </style>
 

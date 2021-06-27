@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div fluid style='padding: 0px;overflow-x:hidden;'>
     <NavBar  logoColor='black' style='color: black;' fontColor="black" current="产品"/>
     <div>
       <div class='product-all-box'>
@@ -21,6 +21,12 @@
   </div>
 </template>
 <style scoped>
+  @media only screen and (max-width: 800px) {
+    .product-all-box {
+      margin-top: 2rem;
+      padding: 1rem !important;
+    }
+  }
   .product-all-box {
     padding: 5rem 10% 0 10%;
   }

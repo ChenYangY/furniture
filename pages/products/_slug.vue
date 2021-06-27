@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div fluid style='padding: 0px;overflow-x:hidden;'>
     <NavBar logoColor='black' style='color: black;' fontColor="black"/>
     <div class='product-box clearfix'>
       <div class='product-box-body clearfix'>
@@ -74,6 +74,24 @@
   </div>
 </template>
 <style scoped>
+  @media only screen and (max-width: 800px) {
+    .product-img {
+      width: 100% !important;
+
+    }
+    .product-box-carousel {
+      margin-right: 0 !important;
+    }
+    .product-box {
+      margin: 0 !important;
+    }
+    .product-detail-box {
+      padding: 1rem;
+    }
+    .product-more {
+      padding: 1rem;
+    }
+  }
   .product-img {
     width: 27rem;
     height: 30rem;

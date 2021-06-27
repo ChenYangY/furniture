@@ -1,68 +1,119 @@
 <template>
-  <div class='row navbar'>
-    <Logo :color= "logoColor" />
-    <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'">
-      <a href='/' :class="current === '首页'? 'active':''">首页</a>
-    </div>
-    <div
-      :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'"
-      @mouseover="menus.products.isShow=true" @mouseleave="menus.products.isShow=false">
-      <a href='#' :class="current === '产品'? 'active': ''" >产品</a>
-      <div class='sub-menu' v-show="menus.products.isShow">
-        <ul class="sub-menu-list">
-          <li v-for="(item, index) in menus.products.list" :key='index'>
-            <a
-              :href="'/products?tags='+ item.label"
-              @mouseover="childMenu=item.children;childMenuTitle=item.label;"
-            >{{item.label}}</a>
-          </li>
-        </ul>
-        <div v-show="childMenu.length > 0"
-          class='navbar-child-menu'
-        >
-          <!-- <label>{{childMenuTitle}}:</label> -->
-          <ul>
-            <li v-for="(child, childIdx) in childMenu" :key="childIdx">
-              <a :href="'/products?tags='+ child.label">{{child.label}}</a>
+  <div>
+    <div class='row navbar navbar-pc'>
+      <Logo height="120" width="120" />
+      <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'">
+        <a href='/' :class="current === '首页'? 'active':''">首页</a>
+      </div>
+      <div
+        :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'"
+        @mouseover="menus.products.isShow=true" @mouseleave="menus.products.isShow=false">
+        <a href='#' :class="current === '产品'? 'active': ''" >产品</a>
+        <div class='sub-menu' v-show="menus.products.isShow">
+          <ul class="sub-menu-list">
+            <li v-for="(item, index) in menus.products.list" :key='index'>
+              <a
+                :href="'/products?tags='+ item.label"
+                @mouseover="childMenu=item.children;childMenuTitle=item.label;"
+              >{{item.label}}</a>
+            </li>
+          </ul>
+          <div v-show="childMenu.length > 0"
+            class='navbar-child-menu'
+          >
+            <!-- <label>{{childMenuTitle}}:</label> -->
+            <ul>
+              <li v-for="(child, childIdx) in childMenu" :key="childIdx">
+                <a :href="'/products?tags='+ child.label">{{child.label}}</a>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+      <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'" @mouseover="menus.brands.isShow=true" @mouseleave="menus.brands.isShow=false; childMenu=[];">
+        <a href='#'>品牌</a>
+        <div class='sub-menu' v-show="menus.brands.isShow">
+          <ul class="sub-menu-list">
+            <li v-for="(item, index) in menus.brands.list" :key='index'>
+              <a :href="'/products?brand='+item._id">{{item.name}}</a>
             </li>
           </ul>
         </div>
+      </div>
+      <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'">
+        <a href='/about-us' :class="current === '关于我们'? 'active': ''">关于我们</a>
+      </div>
+      <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'">
+        <b-input-group class='search'>
+          <b-input-group-prepend>
+            <b-img src='/images/grey_search.png' />
+          </b-input-group-prepend>
+          <b-form-input @change='search($event)' style='border: 0;' type='text' placeholder="在此输入搜索内容"/>
+        </b-input-group>
 
       </div>
+      <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'">
+        <div class='ellipse'></div>
+      </div>
     </div>
-    <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'" @mouseover="menus.brands.isShow=true" @mouseleave="menus.brands.isShow=false; childMenu=[];">
-      <a href='#'>品牌</a>
-      <div class='sub-menu' v-show="menus.brands.isShow">
-        <ul class="sub-menu-list">
-          <li v-for="(item, index) in menus.brands.list" :key='index'>
-            <a :href="'/products?brand='+item._id">{{item.name}}</a>
+    <div class='row navbar navbar-m'>
+      <Logo height="50" width="50" />
+      <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'"
+        @click="showMobileMenu=true"
+      >
+        <div class='ellipse'></div>
+      </div>
+    </div>
+    <div class='m-menu' v-show="showMobileMenu">
+      <div class='m-menu-header clearfix'>
+        <div class='left m-menu-header-label'>全部产品</div>
+        <b-img src='/images/x-img.png' class='right' @click="showMobileMenu=false"/>
+      </div>
+      <div class='m-navbar-menu-body'>
+        <ul class='m-navbar-menu-list'>
+          <li v-for="(item, index) in menus.products.list" :key='index' class='m-navbar-menu-list-1'>
+            <a
+              :href="'/products?tags='+ item.label"
+            >{{item.label}}</a>
+            <ul class='m-navbar-menu-list'>
+              <li v-for="(child, childIdx) in item.children" :key="childIdx">
+                <a :href="'/products?tags='+ child.label">{{child.label}}</a>
+              </li>
+            </ul>
           </li>
         </ul>
       </div>
-    </div>
-    <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'">
-      <a href='/about-us' :class="current === '关于我们'? 'active': ''">关于我们</a>
-    </div>
-    <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'">
-      <b-input-group class='search'>
-        <b-input-group-prepend>
-          <b-img src='/images/grey_search.png' />
-        </b-input-group-prepend>
-        <b-form-input @change='search($event)' style='border: 0;' type='text' placeholder="在此输入搜索内容"/>
-      </b-input-group>
-
-    </div>
-    <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'">
-      <div class='ellipse'></div>
     </div>
   </div>
 </template>
 
 <style scoped>
+  @media only screen and (max-width: 800px) {
+    .navbar-pc {
+      display: none;
+    }
+    .navbar-m {
+      display: flex;
+    }
+    .ellipse {
+      display: block;
+    }
+  }
+  @media only screen and (min-width: 800px) {
+    .navbar-pc {
+      display: flex;
+    }
+    .navbar-m {
+      display: none;
+    }
+    .ellipse {
+      display: none;
+    }
+  }
   .navbar {
     padding: 35px 10% 0 10%;
     font-size: 1.5rem;
-    /* border: 1px solid black; */
   }
   .navbar-item-light, .navbar-item-dark {
     padding: 25px 0px;
@@ -194,6 +245,52 @@
   .navbar-child-menu > ul > li > a {
     color: black;
   }
+
+  .m-menu {
+    position: absolute;
+    background: white;
+    width: 100%;
+    top: 0;
+    padding: 2rem 1.5rem;
+    z-index: 1200;
+  }
+
+  .m-menu-header-label {
+    font-size: 1.2rem;
+    font-weight: 500;
+    /* display:inline-block; */
+    float: left;
+  }
+
+  .m-navbar-menu-list {
+    list-style: none;
+  }
+
+  .m-navbar-menu-list {
+    margin: 0;
+    padding: 0 1rem;
+
+  }
+  .m-navbar-menu-list > .m-navbar-menu-list-1 {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 0.5rem;
+  }
+
+  .m-navbar-menu-list-1 > a {
+    font-weight: 500;
+    display: block;
+    height: 2.5rem;
+  }
+  .m-navbar-menu-list> li > a {
+    color: black;
+  }
+
+  .m-navbar-menu-list-1 > ul > li {
+    margin: 10px 0;
+  }
+
 </style>
 <script>
 import Logo from '../components/Logo';
@@ -204,6 +301,7 @@ export default {
   data() {
     return {
       shoMenu: false,
+      showMobileMenu: false,
       menus: {
         products: {
           list: [{

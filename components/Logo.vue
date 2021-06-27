@@ -1,5 +1,5 @@
 <template>
-  <b-img src="/images/logo.jpeg" width=120 height=120 />
+  <b-img src="/images/logo.jpeg" width="heigth" height="width" />
 </template>
 
 <script>
@@ -7,7 +7,7 @@ export default  {
   data: () => {
     return {};
   },
-  props: ['color']
+  props: ['heigth', 'width']
 };
 </script>
 
