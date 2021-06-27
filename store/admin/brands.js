@@ -53,12 +53,25 @@ export const actions = {
       logo: state.brandForm.logo,
       description: state.brandForm.description,
     };
-    const res = await axios.post(routePath, data);
+    let res = null;
+    try {
+      res = await axios.post(routePath, data);
+    } catch(e) {
+      res = e.response;
+    }
     return res.data;
   },
   async remove({commit}, {id,idx}) {
-    const res = await axios.delete(`${routePath}/${id}`);
-    commit('remove', idx);
+    let res = null;
+    try {
+      res = await axios.delete(`${routePath}/${id}`);
+    } catch(e) {
+      res = e.response;
+    }
+    if(!res.data.code) {
+      commit('remove', idx);
+    }
+
     return res.data;
   },
   async update({commit, state}) {
@@ -67,18 +80,39 @@ export const actions = {
       logo: state.brandForm.logo,
       description: state.brandForm.description,
     };
-    const res = await axios.put(`${routePath}/${state.brandForm._id}`, data);
-    commit('update', state.brandForm._id);
+    let res = null;
+    try {
+      res = await axios.put(`${routePath}/${state.brandForm._id}`, data);
+    } catch(e) {
+      res = e.response;
+    }
+    if(!res.data.code) {
+      commit('update', state.brandForm._id);
+    }
     return res.data;
   },
   async setStatus({commit}, {id, idx, status}) {
-    const res = await axios.put(`${routePath}/${id}`, {status: status});
-    commit('update', idx);
+    let res = null;
+    try {
+      res = await axios.put(`${routePath}/${id}`, {status: status});
+    } catch(e) {
+      res = e.response;
+    }
+    if(!res.data.code) {
+      commit('update', idx);
+    }
     return res.data;
   },
   async index({commit}, {page,size, sort}) {
-    const res = await axios.get(`${routePath}?page=${page}&size=${size}&sort=${sort}`);
-    commit('index', res.data.data);
+    let res = null;
+    try {
+      res = await axios.get(`${routePath}?page=${page}&size=${size}&sort=${sort}`);
+    } catch(e) {
+      res = e.response;
+    }
+    if(!res.data.code) {
+      commit('index', res.data.data);
+    }
     return res.data;
   }
 };

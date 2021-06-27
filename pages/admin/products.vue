@@ -41,7 +41,7 @@
           ></b-pagination>
         </b-col>
       </b-row>
-      <b-modal id="product_modal" modal-title="{form.title}"  size="xl" @ok="submitForm()" ref="form">
+      <b-modal id="product_modal" modal-title="{form.title}"  size="xl" ref="form">
         <template #modal-title>
           <h6>{{form.title}}</h6>
         </template>
@@ -96,8 +96,8 @@
             ></b-form-textarea>
           </b-form-group>
         </form>
-        <template #modal-footer="{ ok, cancel }">
-          <b-button size="sm" variant="info" @click="ok()">
+        <template #modal-footer="{ cancel }">
+          <b-button size="sm" variant="info" @click="submitForm()">
             {{form.btnSumitLabel}}
           </b-button>
           <b-button size="sm" variant="danger" @click="cancel()">
@@ -124,6 +124,7 @@
         </template>
       </b-modal>
     </b-container>
+    <AlertHint :msg="alertMsg" v-show="alertMsg"/>
   </div>
 </template>
 
@@ -134,8 +135,9 @@ import AdminBar from '../../components/admin/bar';
 import AdminMenu from '../../components/admin/menu';
 import TagInput from '../../components/TagInput';
 import ImageInput from '../../components/ImageInuput';
+import AlertHint  from '../../components/AlertHint';
 export default {
-  components: {AdminBar, AdminMenu, TagInput, ImageInput},
+  components: {AdminBar, AdminMenu, TagInput, ImageInput, AlertHint},
   data() {
     return {
       menus: this.$store.state.menus,
@@ -157,6 +159,7 @@ export default {
         file: null,
       },
       batch_import_file: null,
+      alertMsg: '',
     };
   },
   computed: mapState({
@@ -222,18 +225,27 @@ export default {
       ];
       let data = _.pick(this.form, fields);
       this.$store.commit('admin/products/setProductForm', data);
+      let res = null;
       if(!this.form._id) {
-        await this.$store.dispatch('admin/products/create');
+        res = await this.$store.dispatch('admin/products/create');
       }
       else {
-        await this.$store.dispatch('admin/products/update');
+        res = await this.$store.dispatch('admin/products/update');
+      }
+      if(res.code) {
+        this.alertMsg = res.msg;
+        return;
       }
       this.$bvModal.hide('product_form', 'hide');
       this.clearForm();
       this.$fetch();
     },
     async deleteRecord(item, index) {
-      await this.$store.dispatch('admin/products/remove', {id: item._id, idx: index});
+      let res = await this.$store.dispatch('admin/products/remove', {id: item._id, idx: index});
+      if(res.code) {
+        this.alertMsg = res.msg;
+        return;
+      }
       this.$fetch();
     },
     showBatchImportForm() {
@@ -241,7 +253,11 @@ export default {
       this.$bvModal.show('product_batch_import_modal');
     },
     async submitBatchForm() {
-      await this.$store.dispatch('admin/products/batchImport', this.batch_import_file);
+      let res = await this.$store.dispatch('admin/products/batchImport', this.batch_import_file);
+      if(res.code) {
+        this.alertMsg = this.msg;
+        return;
+      }
       this.$fetch();
     }
   },
@@ -259,7 +275,10 @@ export default {
     query.page = parseInt(this.$route.query.page, 10) || 1;
     query.size = parseInt(this.$route.query.size, 10) || 10;
     query.sort = '-create_at';
-    await this.$store.dispatch('admin/products/index', query);
+    let res = await this.$store.dispatch('admin/products/index', query);
+    if(res.code) {
+      this.alertMsg = res.msg;
+    }
     this.pageSize = query.size || 10;
     this.pageCur = query.page || 1;
     this.$refs.paginationComponent.currentPage = query.page;

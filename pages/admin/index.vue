@@ -18,23 +18,30 @@
       </b-input-group>
       <b-button block variant="primary" type='submit'>登录</b-button>
     </b-form>
+    <AlertHint :msg="alertMsg" v-show="alertMsg"/>
   </b-container>
 </template>
 
 <script>
+import AlertHint from '../../components/AlertHint.vue';
 export default {
+  components: {AlertHint},
   data() {
     return {
       username: '',
-      password: ''
+      password: '',
+      alertMsg: '',
     };
   },
   methods: {
     async onSubmit(event) {
       event.preventDefault();
-      let isLogin = await this.$store.dispatch('login', { username: this.username, password: this.password});
-      if(isLogin) {
+      let res = await this.$store.dispatch('login', { username: this.username, password: this.password});
+      if(!res.code) {
         window.location.href = '/admin/brands';
+      }
+      else {
+        this.alertMsg = res.msg;
       }
     }
   }

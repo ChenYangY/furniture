@@ -37,7 +37,7 @@
           ></b-pagination>
         </b-col>
       </b-row>
-      <b-modal id="carousel_modal" modal-title="{carouselForm.title}"  size="xl" @ok="submitCarouselForm()" ref="carouselForm">
+      <b-modal id="carousel_modal" modal-title="{carouselForm.title}"  size="xl"  ref="carouselForm">
         <template #modal-title>
           <h6>{{carouselForm.title}}</h6>
         </template>
@@ -93,8 +93,8 @@
           </b-form-group>
           <b-button variant="info" @click="addImageItem">添加</b-button>
         </form>
-        <template #modal-footer="{ ok, cancel }">
-          <b-button size="sm" variant="info" @click="ok()">
+        <template #modal-footer="{ cancel }">
+          <b-button size="sm" variant="info" @click="submitCarouselForm()">
             {{carouselForm.btnSumitLabel}}
           </b-button>
           <b-button size="sm" variant="danger" @click="cancel()">
@@ -103,6 +103,7 @@
         </template>
       </b-modal>
     </b-container>
+    <AlertHint :msg="alertMsg" v-show="alertMsg"/>
   </div>
 </template>
 
@@ -120,8 +121,9 @@
 import { mapState } from 'vuex';
 import AdminBar from '../../components/admin/bar';
 import AdminMenu from '../../components/admin/menu';
+import AlertHint from '../../components/AlertHint.vue';
 export default {
-  components: {AdminBar, AdminMenu},
+  components: {AdminBar, AdminMenu, AlertHint},
   data() {
     return {
       menus: this.$store.state.menus,
@@ -137,6 +139,7 @@ export default {
         redirect: '',
         file: null,
       },
+      alertMsg: '',
     };
   },
   computed: mapState({
@@ -165,14 +168,15 @@ export default {
         id: item._id,
         status: item.status,
       });
-      if(res.code != 0) {
-        console.log(res.msg);
+      if(res.code !== 0) {
+        this.alertMsg = res.msg;
+        return;
       }
     },
     async addImageItem() {
       let body = await this.$store.dispatch('admin/upload', [this.carouselForm.file]);
       if(body.code !== 0) {
-        console.log(body.msg);
+        this.alertMsg = body.msg;
         return;
       }
       // let origin = window.location.origin;
@@ -199,6 +203,7 @@ export default {
     },
     clearCarouselForm() {
       this.carouselForm.title = '创建轮播图';
+      this.carouselForm.btnSumitLabel = '创建';
       this.carouselForm._id = '';
       this.carouselForm.name = '';
       this.carouselForm.images = [];
@@ -217,21 +222,27 @@ export default {
         images: this.carouselForm.images,
       };
       this.$store.commit('admin/carousels/setCarouselForm',data);
-
+      let res = null;
       if(!this.carouselForm._id) {
-        await this.$store.dispatch('admin/carousels/create');
+        res = await this.$store.dispatch('admin/carousels/create');
       }
       else {
-        await this.$store.dispatch('admin/carousels/update');
+        res = await this.$store.dispatch('admin/carousels/update');
+      }
+      if(res.code) {
+        this.alertMsg = res.msg;
+        return;
       }
       this.$bvModal.hide('carousel_form', 'hide');
-      this.carouselForm._id = '';
-      this.carouselForm.name = '';
-      this.carouselForm.images = [];
+      this.clearCarouselForm();
       this.$fetch();
     },
     async deleteRecord(item, index) {
-      await this.$store.dispatch('admin/carousels/remove', {id: item._id, idx: index});
+      let res = await this.$store.dispatch('admin/carousels/remove', {id: item._id, idx: index});
+      if(res.code) {
+        this.alertMsg = res.msg;
+        return;
+      }
       this.$fetch();
     },
 
@@ -242,7 +253,11 @@ export default {
     query.page = parseInt(this.$route.query.page, 10) || 1;
     query.size = parseInt(this.$route.query.size, 10) || 10;
     query.sort = '-create_at';
-    await this.$store.dispatch('admin/carousels/index', query);
+    let res = await this.$store.dispatch('admin/carousels/index', query);
+    if(res.code) {
+      this.alertMsg = res.msg;
+      return;
+    }
     this.pageSize = query.size || 10;
     this.pageCur = query.page || 1;
     this.$refs.paginationComponent.currentPage = query.page;

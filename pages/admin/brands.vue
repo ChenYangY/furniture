@@ -37,7 +37,7 @@
           ></b-pagination>
         </b-col>
       </b-row>
-      <b-modal id="brand_modal" modal-title="{form.title}"  size="xl" @ok="submitForm()" ref="form">
+      <b-modal id="brand_modal" modal-title="{form.title}"  size="xl"  ref="form">
         <template #modal-title>
           <h6>{{form.title}}</h6>
         </template>
@@ -78,8 +78,8 @@
             ></b-form-textarea>
           </b-form-group>
         </form>
-        <template #modal-footer="{ ok, cancel }">
-          <b-button size="sm" variant="info" @click="ok()">
+        <template #modal-footer="{ cancel }">
+          <b-button size="sm" variant="info" @click="submitForm()">
             {{form.btnSumitLabel}}
           </b-button>
           <b-button size="sm" variant="danger" @click="cancel()">
@@ -88,6 +88,7 @@
         </template>
       </b-modal>
     </b-container>
+    <AlertHint :msg="alertMsg" v-show="alertMsg"/>
   </div>
 </template>
 
@@ -95,8 +96,9 @@
 import { mapState } from 'vuex';
 import AdminBar from '../../components/admin/bar';
 import AdminMenu from '../../components/admin/menu';
+import AlertHint from '../../components/AlertHint';
 export default {
-  components: {AdminBar, AdminMenu},
+  components: {AdminBar, AdminMenu, AlertHint},
   data() {
     return {
       menus: this.$store.state.menus,
@@ -112,6 +114,7 @@ export default {
         description: '',
         file: null,
       },
+      alertMsg: '',
     };
   },
   computed: mapState({
@@ -137,9 +140,12 @@ export default {
       this.$bvModal.show('brand_modal');
     },
     clearForm() {
+      this.form.title = '创建品牌';
+      this.form.btnSumitLabel = '创建';
       this.form.name = '';
       this.form._id = '';
       this.form.description = '';
+      this.form.images = [];
       this.form.logo = '';
     },
     updateForm(item) {
@@ -159,6 +165,8 @@ export default {
       if(!this.form.logo) {
         const uploadRes = await this.$store.dispatch('admin/upload', [this.form.file]);
         if(uploadRes.code !== 0) {
+          console.log(uploadRes);
+          this.alertMsg = uploadRes.msg;
           return ;
         }
         // data.logo = `${window.location.origin}${uploadRes.data.path}`;
@@ -167,23 +175,28 @@ export default {
       else {
         data.logo = this.form.logo;
       }
-
-
       this.$store.commit('admin/brands/setBrandForm',data);
+      let res = null;
       if(!this.form._id) {
-        await this.$store.dispatch('admin/brands/create');
+        res = await this.$store.dispatch('admin/brands/create');
       }
       else {
-        await this.$store.dispatch('admin/brands/update');
+        res = await this.$store.dispatch('admin/brands/update');
+      }
+      if(res.code) {
+        this.alertMsg = res.msg;
+        return ;
       }
       this.$bvModal.hide('brand_form', 'hide');
-      this.form._id = '';
-      this.form.name = '';
-      this.form.images = [];
+      this.clearForm();
       this.$fetch();
     },
     async deleteRecord(item, index) {
-      await this.$store.dispatch('admin/brands/remove', {id: item._id, idx: index});
+      let res = await this.$store.dispatch('admin/brands/remove', {id: item._id, idx: index});
+      if(res.code) {
+        this.alertMsg = res.msg;
+        return ;
+      }
       this.$fetch();
     },
 
@@ -194,7 +207,11 @@ export default {
     query.page = parseInt(this.$route.query.page, 10) || 1;
     query.size = parseInt(this.$route.query.size, 10) || 10;
     query.sort = '-create_at';
-    await this.$store.dispatch('admin/brands/index', query);
+    let res = await this.$store.dispatch('admin/brands/index', query);
+    if(res.code) {
+      this.alertMsg = res.msg;
+      return;
+    }
     this.pageSize = query.size || 10;
     this.pageCur = query.page || 1;
     this.$refs.paginationComponent.currentPage = query.page;

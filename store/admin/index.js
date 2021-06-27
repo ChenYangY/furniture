@@ -12,7 +12,12 @@ export const actions = {
     _.each(files, (file, index) => {
       form.append(`file_${index}`, file);
     });
-    let response = await axios.post('/admin-api/upload', form);
+    let response = null;
+    try {
+      response = await axios.post('/admin-api/upload', form);
+    } catch(e) {
+      response = e.response;
+    }
     return response.data;
   }
 };

@@ -21,11 +21,15 @@ export const mutations = {
 
 export const actions = {
   async login({commit}, data) {
-    let res = await axios.post('/login', data);
-    if(res.data.msg === ' ok') {
-      commit('login');
-      return 0;
+    let res = null;
+    try {
+      res = await axios.post('/login', data);
+    } catch(e) {
+      res = e.response;
     }
-    return -1;
+    if(res.data.code === ' ok') {
+      commit('login');
+    }
+    return res.data;
   }
 };

@@ -30,7 +30,6 @@ export default {
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      console.log(this.username, this.password);
     }
   }
 };
