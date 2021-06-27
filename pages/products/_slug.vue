@@ -77,13 +77,14 @@
   @media only screen and (max-width: 800px) {
     .product-img {
       width: 100% !important;
-
     }
+
     .product-box-carousel {
+      width: 100% !important;
       margin-right: 0 !important;
     }
     .product-box {
-      margin: 0 !important;
+      margin: 1rem 0 !important;
     }
     .product-detail-box {
       padding: 1rem;
@@ -91,7 +92,11 @@
     .product-more {
       padding: 1rem;
     }
+    .carousel-item {
+      width: 100% !important;
+    }
   }
+
   .product-img {
     width: 27rem;
     height: 30rem;
