@@ -20,7 +20,7 @@
         <div v-show="childMenu.length > 0"
           class='navbar-child-menu'
         >
-          <label>{{childMenuTitle}}:</label>
+          <!-- <label>{{childMenuTitle}}:</label> -->
           <ul>
             <li v-for="(child, childIdx) in childMenu" :key="childIdx">
               <a :href="'/products?tags='+ child.label">{{child.label}}</a>
@@ -40,17 +40,6 @@
         </ul>
       </div>
     </div>
-    <!-- <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'"
-      @mouseover="menus.wechatOfficialAccountQrImg.isShow = true"
-      @mouseleave="menus.wechatOfficialAccountQrImg.isShow = false"
-    >
-      <a href='#'>公众号</a>
-      <div v-show="menus.wechatOfficialAccountQrImg.isShow"
-        class="wechat-official-account-qr-img"
-      >
-        <b-img src='/images/wechat_official_account.jpeg' width=150 heigth=150 />
-      </div>
-    </div> -->
     <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'">
       <a href='/about-us' :class="current === '关于我们'? 'active': ''">关于我们</a>
     </div>
@@ -72,6 +61,7 @@
 <style scoped>
   .navbar {
     padding: 35px 10% 0 10%;
+    font-size: 1.5rem;
     /* border: 1px solid black; */
   }
   .navbar-item-light, .navbar-item-dark {
@@ -120,7 +110,7 @@
   .sub-menu {
     position: absolute;
     left:0;
-    top: 105px;
+    top: 130px;
     /* margin: 0px 6%; */
     width: 100%;
     min-height: 100px;
@@ -128,6 +118,7 @@
     background: rgba(255, 255, 255);
     border-radius: 5px;
     padding: 2rem;
+    font-size: 1.2rem;
     border-bottom: 1px solid #c6c6c5;
   }
   .sub-menu-title {
@@ -145,7 +136,7 @@
   .sub-menu-list > li {
     display: inline-block;
     /* width: 7rem; */
-    padding: 0 1.5rem;
+    padding: 0.5rem 1.5rem;
     margin-top: 0.5rem;
   }
 
@@ -198,7 +189,7 @@
   }
   .navbar-child-menu > ul > li {
     display: inline-block;
-    padding: 0 1rem;
+    padding: 0.5rem 1rem;
   }
   .navbar-child-menu > ul > li > a {
     color: black;

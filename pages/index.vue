@@ -85,7 +85,7 @@ export default {
 
 <style>
   .carousel-box {
-    padding: 2.5rem 7.25rem 7rem 7.25rem;
+    padding: 2.5rem 14% 7rem 14%;
   }
   .carousel-indicators {
     margin-bottom: 2.5rem;
