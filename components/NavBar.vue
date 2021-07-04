@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class='row navbar navbar-pc'>
-      <Logo height="120" width="120" />
+      <a href='/'>
+        <Logo height="120" width="120" />
+      </a>
       <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'">
         <a href='/' :class="current === '首页'? 'active':''">首页</a>
       </div>
@@ -58,7 +60,9 @@
       </div>
     </div>
     <div class='row navbar navbar-m'>
-      <Logo height="50" width="50" />
+      <a href='/'>
+        <Logo height="50" width="50" />
+      </a>
       <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'"
         @click="showMobileMenu=true"
       >

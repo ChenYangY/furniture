@@ -21,7 +21,12 @@
     </p>
   </div>
 </template>
-<style scoped>  
+<style scoped>
+  @media only screen and (max-width: 800px) {
+    .product-list-item img {
+      height: 350px !important;
+    }
+  }
   .item-margin {
     margin-right: 1.5rem;
   }
@@ -29,6 +34,7 @@
     width: 25%;
     padding: 0 10px;
     display: inline-block;
+    vertical-align: top;
   }
   .product-list-item img {
      width: 100%;
@@ -48,7 +54,7 @@
     font-size: 1.2rem;
     line-height: 1.8rem;
     margin: 1rem 0;
-    height: 4rem;
+    /* height: 4rem; */
   }
   .product-load-more {
     border-radius: 5px;
