@@ -17,12 +17,14 @@ module.exports =  {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    '@/assets/css/main.css'
+    '@/assets/css/main.css',
+    'swiper/swiper-bundle.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    './plugins/bootstrap-vue.js'
+    '~/plugins/bootstrap-vue.js',
+    '~/plugins/swiper-vue.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -47,5 +49,5 @@ module.exports =  {
       compact: false
     },
     transpile: ['bootstrap-vue'],
-  }
+  },
 };

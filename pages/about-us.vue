@@ -15,12 +15,15 @@ SIGMALIVING 风物宜</p></div>
           <div class='left' style='width: 9rem;'><label style='display:block;margin-bottom: 1rem;font-weight: 700;'>店铺微信</label><span style='font-size: 0.9rem; margin-bottom: 0.5rem; display:block;'>SIGMALIVING</span></div>
         </div>
       </div>
-      <b-carousel>
-          <b-carousel-slide
-            v-for="(image, index) in carousel.images" :key="index"
-            :img-src="image.url"
-          />
-      </b-carousel>
+      <div style='about-us-carousel'>
+        <b-carousel>
+            <b-carousel-slide
+              v-for="(image, index) in carousel.images" :key="index"
+              :img-src="image.url"
+            >
+            </b-carousel-slide>
+        </b-carousel>
+      </div>
       <p style='color: #777777; margin-top: 2rem;'></p>
       <footer class='page-footer clearfix'>
         <p style='text-align: center;'>2021 © SIGMALIVING 风物宜</p>
@@ -48,7 +51,13 @@ SIGMALIVING 风物宜</p></div>
       font-size: 2rem !important;
 
     }
+    .about-us-carousel {
+      padding: 0;
+    }
 
+  }
+  .about-us-carousel {
+    padding: 0 13%;
   }
   .about-us-box {
     margin: 100px 10% 0px 10%;
@@ -71,6 +80,11 @@ SIGMALIVING 风物宜</p></div>
   .about-us-introduction-title {
     font-size: 3rem;
     margin-bottom:1rem;
+  }
+
+  .about-us-carousel {
+    width: 80% !important;
+    padding: 0 10%;
   }
 </style>
 

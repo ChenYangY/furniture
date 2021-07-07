@@ -31,7 +31,9 @@
     "mongoose-autopopulate": "^0.14.0",
     "node-xlsx": "^0.16.1",
     "nuxt": "^2.14.12",
-    "vue": "^2.6.12"
+    "swiper": "^6.7.5",
+    "vue": "^2.6.12",
+    "vue-awesome-swiper": "^4.1.1"
   },
   "devDependencies": {
     "eslint": "^7.22.0",

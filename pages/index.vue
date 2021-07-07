@@ -3,23 +3,13 @@
     <div>
       <NavBar logoColor="black" current="首页" fontColor="black" style='color: black;'/>
       <div class='carousel-box'>
-        <b-carousel
-        id="carousel-1"
-        v-model="slide"
-        :interval="4000"
-        indicators
-        controls
-        background="#ababab"
-        img-width="1024"
-        img-height="480"
-        style="text-shadow: 1px 1px 2px #333;"
-        @sliding-start="onSlideStart"
-        @sliding-end="onSlideEnd"
-        >
-          <b-carousel-slide v-for="(image, index) in carousel.images" :key="index"
-            :img-src="image.url"
-          />
-        </b-carousel>
+        <div v-swiper:mySwiper="swiperOption" class="swiperWrap" ref='mySwiper'>
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" v-for="(image,index) in carousel.images" :key="index">
+              <img :src="image.url">
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class='home-body clearfix'>
@@ -44,10 +34,11 @@
 <script>
 import NavBar from '../components/NavBar';
 import ProductList from '../components/ProductList';
+
 export default {
   components: {
     NavBar,
-    ProductList
+    ProductList,
   },
   data() {
     return {
@@ -55,15 +46,19 @@ export default {
       sliding: null,
       isShowProductMenu: false,
       carousel: {images: []},
+      swiperOption: {
+        loop: true,
+        centeredSlides: true,
+        slidesPerView: 3,
+        spaceBetween: 10,
+        autoplay: true,
+      }
     };
   },
+  mounted() {
+    this.$refs.mySwiper.swiper.slideTo(1);
+  },
   methods: {
-    onSlideStart() {
-      this.sliding = true;
-    },
-    onSlideEnd() {
-      this.sliding = false;
-    },
     showProductMenu() {
       this.isShowProductMenu = true;
     },
@@ -85,6 +80,7 @@ export default {
 
 
 <style>
+
   @media only screen and (max-width: 800px) {
     .home-body {
       padding: 1rem !important;
@@ -100,8 +96,34 @@ export default {
       padding: 0 !important;
     }
 
+    .swiper-slide > img {
+      height: 30rem;
+    }
+
+  }
+  .swiper-slide {
+    overflow: hidden;
+    /* vertical-align: middle; */
   }
 
+  .swiper-slide > img {
+    height: 25rem;
+  }
+  .swiper-slide-active {
+    width: 60% !important;
+  }
+  /* .swiper-slide-next {
+    padding-left: 1rem;
+  } */
+
+
+  .swiper-slide-next, .swiper-slide-prev {
+    padding: 1rem 0;
+    width: 20% !important;
+  }
+  /* .swiper-slide-next, .swiper-slide-pre {
+    margin: 1rem 0;
+  } */
   .carousel-box {
     padding: 2.5rem 14% 7rem 14%;
   }
