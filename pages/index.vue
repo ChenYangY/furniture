@@ -5,10 +5,13 @@
       <div class='carousel-box'>
         <div v-swiper:mySwiper="swiperOption" class="swiperWrap" ref='mySwiper'>
           <div class="swiper-wrapper">
-            <div class="swiper-slide" v-for="(image,index) in carousel.images" :key="index">
-              <img :src="image.url">
+            <div class="swiper-slide tab-item" v-for="(image,index) in carousel.images" :key="index">
+              <img :src="image.url" />
             </div>
           </div>
+          <div class="swiper-button-next swiper-button-white" @click="prevCarousel"></div> <!-- 白色 -->
+          <div class="swiper-button-prev swiper-button-white"
+          @click="nextCarousel"></div> <!-- 白色 -->
         </div>
       </div>
     </div>
@@ -48,12 +51,32 @@ export default {
       carousel: {images: []},
       swiperOption: {
         loop: true,
+        // autoplay: true,
+        grabCursor: true,
         centeredSlides: true,
-        slidesPerView: 3,
-        spaceBetween: 10,
-        autoplay: true,
+        slidesPerView: 1.30,
+        spaceBetween: 30,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        }
       }
     };
+  },
+  beforeMount() {
+    let width = document.body.clientWidth;
+    console.log(width);
+    if(width < 1400 && width > 960) {
+      this.swiperOption.slidesPerView = 1.18;
+    }
+    else if(width < 960 && width > 480) {
+      this.swiperOption.slidesPerView = 1.30;
+      this.swiperOption.spaceBetween = 20;
+    }
+    else if(width <= 480) {
+      this.swiperOption.slidesPerView = 1.30;
+      this.swiperOption.spaceBetween = 10;
+    }
   },
   mounted() {
     this.$refs.mySwiper.swiper.slideTo(1);
@@ -64,7 +87,12 @@ export default {
     },
     hideProductMenu() {
       this.isShowProductMenu = false;
-
+    },
+    prevCarousel() {
+      this.$refs.mySwiper.swiper.slidePrev();
+    },
+    nextCarousel() {
+      this.$refs.mySwiper.swiper.slideNext();
     }
   },
   fetchOnServer: false,
@@ -95,37 +123,86 @@ export default {
     .product-area {
       padding: 0 !important;
     }
+  }
+  @media only screen and (min-width:1300px) and (max-width: 1400px) {
+    .tab-item {
+      height: 20rem;
+    }
+  }
 
-    .swiper-slide > img {
+  @media only screen and (min-width:1200px) and (max-width: 1300px) {
+    .tab-item {
+      height: 25rem;
+    }
+  }
+
+  @media only screen and (min-width:720px) and (max-width: 1200px) {
+    .tab-item {
+      height: 25rem;
+    }
+  }
+
+  @media only screen and  (min-width:480px) and (max-width: 720px) {
+    .tab-item {
+      height: 34rem;
+    }
+  }
+
+  @media only screen and (min-width: 360px) and (max-width: 480px) {
+    .tab-item {
+      height: 36rem;
+    }
+  }
+
+  @media only screen and (max-width: 359px) {
+    .tab-item {
+      height: 40rem;
+    }
+  }
+
+
+  @media only screen and (max-width: 720px) {
+    .swiper-button-prev, .swiper-button-next {
+      display: none;
+    }
+  }
+
+  @media only screen and (min-width:1400px) and (max-width: 1500px) {
+    .tab-item {
+      height: 29rem;
+    }
+  }
+
+  @media only screen and (min-width: 1600px) {
+    .tab-item {
       height: 30rem;
     }
-
   }
-  .swiper-slide {
-    overflow: hidden;
-    /* vertical-align: middle; */
+  .tab-item {
+    /* height: calc(100% - 300px); */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
   }
-
-  .swiper-slide > img {
-    height: 25rem;
-  }
-  .swiper-slide-active {
-    width: 60% !important;
-  }
-  /* .swiper-slide-next {
-    padding-left: 1rem;
-  } */
-
 
   .swiper-slide-next, .swiper-slide-prev {
-    padding: 1rem 0;
-    width: 20% !important;
+    transform: scale(0.95) !important;
   }
-  /* .swiper-slide-next, .swiper-slide-pre {
-    margin: 1rem 0;
+
+  /* .tab-item > .slide-content {
+    position: absolute;
+    top: 752px;
+    width: 100%;
   } */
+
+  .tab-item > img {
+    width: 100%;
+    height: 100%;
+  }
+
   .carousel-box {
-    padding: 2.5rem 14% 7rem 14%;
+    padding: 1.5rem 0% 7rem 0%;
   }
   .carousel-indicators {
     margin-bottom: 2.5rem;

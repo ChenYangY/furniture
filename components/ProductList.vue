@@ -44,6 +44,7 @@
     color: black;
     display: block !important;
     float: left;
+    width: 100%;
   }
 
   .product-list-item > a:hover {
