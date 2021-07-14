@@ -2,7 +2,7 @@
   <b-container fluid style='padding: 0px;overflow-x:hidden;'>
     <div>
       <NavBar logoColor="black" current="首页" fontColor="black" style='color: black;'/>
-      <div class='carousel-box'>
+      <div class='carousel-box' ref='carousel_box'>
         <div v-swiper:mySwiper="swiperOption" class="swiperWrap" ref='mySwiper'>
           <div class="swiper-wrapper">
             <div class="swiper-slide tab-item" v-for="(image,index) in carousel.images" :key="index">
@@ -79,6 +79,15 @@ export default {
     }
   },
   mounted() {
+    let height = document.documentElement.clientHeight;
+    let width = document.documentElement.clientWidth;
+    if(width < 800) {
+      this.$refs.carousel_box.setAttribute('style', `height: ${height - 130}px`);
+    }
+    else {
+      this.$refs.carousel_box.setAttribute('style', `height: ${height -200}px`);
+    }
+
     this.$refs.mySwiper.swiper.slideTo(1);
   },
   methods: {
@@ -114,49 +123,17 @@ export default {
       padding: 1rem !important;
     }
     .introduction-area {
-      padding: 0 !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
     }
 
     .introduction-area {
-      padding: 0 !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
     }
     .product-area {
-      padding: 0 !important;
-    }
-  }
-  @media only screen and (min-width:1300px) and (max-width: 1400px) {
-    .tab-item {
-      height: 20rem;
-    }
-  }
-
-  @media only screen and (min-width:1200px) and (max-width: 1300px) {
-    .tab-item {
-      height: 25rem;
-    }
-  }
-
-  @media only screen and (min-width:720px) and (max-width: 1200px) {
-    .tab-item {
-      height: 25rem;
-    }
-  }
-
-  @media only screen and  (min-width:480px) and (max-width: 720px) {
-    .tab-item {
-      height: 34rem;
-    }
-  }
-
-  @media only screen and (min-width: 360px) and (max-width: 480px) {
-    .tab-item {
-      height: 36rem;
-    }
-  }
-
-  @media only screen and (max-width: 359px) {
-    .tab-item {
-      height: 40rem;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
     }
   }
 
@@ -167,27 +144,20 @@ export default {
     }
   }
 
-  @media only screen and (min-width:1400px) and (max-width: 1500px) {
-    .tab-item {
-      height: 29rem;
-    }
-  }
-
-  @media only screen and (min-width: 1600px) {
-    .tab-item {
-      height: 30rem;
-    }
-  }
   .tab-item {
-    /* height: calc(100% - 300px); */
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
   }
 
+  .swiper-container {
+    height: 100%;
+  }
+
   .swiper-slide-next, .swiper-slide-prev {
     transform: scale(0.95) !important;
+    opacity: .5;
   }
 
   /* .tab-item > .slide-content {
@@ -202,7 +172,7 @@ export default {
   }
 
   .carousel-box {
-    padding: 1.5rem 0% 7rem 0%;
+    padding-top: 1.5rem;
   }
   .carousel-indicators {
     margin-bottom: 2.5rem;
@@ -229,7 +199,6 @@ export default {
     padding: 3rem 3.5rem;
     width: 100%;
     border-radius: 5px 5px 0 0;
-    margin-top: -7rem;
     background:white;
   }
 
