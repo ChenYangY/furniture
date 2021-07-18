@@ -51,7 +51,9 @@ export default {
       carousel: {images: []},
       swiperOption: {
         loop: true,
-        // autoplay: true,
+        autoplay: {
+          delay:3000
+        },
         grabCursor: true,
         speed: 1500,
         centeredSlides: true,
