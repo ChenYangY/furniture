@@ -187,7 +187,7 @@ export default {
         this.alertMsg = res.msg;
         return ;
       }
-      this.$bvModal.hide('brand_form', 'hide');
+      this.$bvModal.hide('brand_modal', 'hide');
       this.clearForm();
       this.$fetch();
     },

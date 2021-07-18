@@ -95,7 +95,7 @@ export const actions = {
     }
     return res.data;
   },
-  async setStatus({commit}, {id, idx, status}) {
+  async setStatus({commit}, {id, status}) {
     let res = null;
     try {
       res = await axios.put(`${routePath}/${id}`, {status: status});
@@ -103,7 +103,7 @@ export const actions = {
       res = e.response;
     }
     if(!res.data.code) {
-      commit('update', idx);
+      commit('update', id);
     }
     return res.data;
   },

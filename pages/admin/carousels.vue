@@ -37,7 +37,7 @@
           ></b-pagination>
         </b-col>
       </b-row>
-      <b-modal id="carousel_modal" modal-title="{carouselForm.title}"  size="xl"  ref="carouselForm">
+      <b-modal id="carousel_modal" modal-title="{carouselForm.title}"  size="xl">
         <template #modal-title>
           <h6>{{carouselForm.title}}</h6>
         </template>
@@ -68,7 +68,11 @@
               <label>轮播图片</label>
               <ul style='padding-left: 10px;'>
                 <li v-for="(image, idx) in carouselForm.images" :key="idx" class='row' style='box-shadow: 1px 1px 1px #888888;margin: 2px;'>
-                  <a :href="image.url" class='col-6' style='overflow:hidden;'>{{image.url}}</a>
+                   <b-img class='col-3' v-if="image.pc_url" :src="image.pc_url"  height=100 />
+
+                  <b-img class='col-3' v-if="image.m_url" :src="image.m_url" width=50 />
+
+                  <!-- <a :href="image.url" class='col-6' style='overflow:hidden;'>{{image.url}}</a> -->
                   <span class='col-4' style='overflow:hidden;'>{{image.redirect}}</span>
                   <b-icon class='col-1' icon='x-square' style='margin-top: 5px' @click="removeImageItem(idx)"/>
                 </li>
@@ -77,14 +81,21 @@
         </form>
         <form class='carousel-image-form'>
           <div style='padding-bottom: 5px;'><h5>图片元素添加</h5></div>
-          <b-form-group label="添加图片" label-for="carousel_form_file">
+          <b-form-group label="添加电脑端图片" label-for="carousel_form_file">
             <b-form-file
-              id='carousel_form_file'
-              v-model="carouselForm.file"
+              id='carousel_form_pc_file'
+              v-model="carouselForm.pc_file"
               placeholder="点击添加"
             ></b-form-file>
           </b-form-group>
-          <b-form-group label="跳转链接" label-for="carousel_form_direct">
+          <b-form-group label="添加移动端图片" label-for="carousel_form_file">
+            <b-form-file
+              id='carousel_form_m_file'
+              v-model="carouselForm.m_file"
+              placeholder="点击添加"
+            ></b-form-file>
+          </b-form-group>
+          <b-form-group label="跳转链接" label-for="carousel_form_direct" hidden>
             <b-form-input
               id="carousel_form_direct"
               v-model="carouselForm.redirect"
@@ -137,7 +148,8 @@ export default {
         name: '',
         images: [],
         redirect: '',
-        file: null,
+        pc_file: null,
+        m_file: null,
       },
       alertMsg: '',
     };
@@ -158,15 +170,9 @@ export default {
       this.infoModal.content = '';
     },
     async setStatus(item, val) {
-      if(val) {
-        item.status = 'ON';
-      }
-      else {
-        item.status = 'OFF';
-      }
       const res = await this.$store.dispatch('admin/carousels/setStatus', {
         id: item._id,
-        status: item.status,
+        status: val ? 'ON' : 'OFF',
       });
       if(res.code !== 0) {
         this.alertMsg = res.msg;
@@ -174,18 +180,32 @@ export default {
       }
     },
     async addImageItem() {
-      let body = await this.$store.dispatch('admin/upload', [this.carouselForm.file]);
-      if(body.code !== 0) {
-        this.alertMsg = body.msg;
+      if(!this.carouselForm.pc_file && !this.carouselForm.m_file) {
+        this.alertMsg = '还未选择图片';
         return;
       }
-      // let origin = window.location.origin;
-      this.carouselForm.images.push({
-        url: `${body.data.paths[0]}`,
-        redirect: this.carouselForm.redirect,
-      });
+      const requestBody = {redirect: this.carouselForm.redirect};
+      if(this.carouselForm.pc_file) {
+        let body = await this.$store.dispatch('admin/upload', [this.carouselForm.pc_file]);
+        if(body.code !== 0) {
+          this.alertMsg = '电脑端图片:' + body.msg;
+          return;
+        }
+        requestBody.pc_url = body.data.paths[0];
+      }
+      if(this.carouselForm.m_file) {
+        let body = await this.$store.dispatch('admin/upload', [this.carouselForm.m_file]);
+        if(body.code !== 0) {
+          this.alertMsg = '移动端端图片:' + body.msg;
+          return;
+        }
+        requestBody.m_url = body.data.paths[0];
+      }
 
-      this.carouselForm.file = null,
+      // let origin = window.location.origin;
+      this.carouselForm.images.push(requestBody);
+      this.carouselForm.m_file = null,
+      this.carouselForm.pc_file = null;
       this.carouselForm.redirect = '';
 
     },
@@ -233,9 +253,9 @@ export default {
         this.alertMsg = res.msg;
         return;
       }
-      this.$bvModal.hide('carousel_form', 'hide');
+      this.$bvModal.hide('carousel_modal');
       this.clearCarouselForm();
-      this.$fetch();
+      await this.$fetch();
     },
     async deleteRecord(item, index) {
       let res = await this.$store.dispatch('admin/carousels/remove', {id: item._id, idx: index});

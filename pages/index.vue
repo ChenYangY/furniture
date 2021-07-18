@@ -53,6 +53,7 @@ export default {
         loop: true,
         // autoplay: true,
         grabCursor: true,
+        speed: 1500,
         centeredSlides: true,
         slidesPerView: 1.30,
         spaceBetween: 30,
@@ -109,8 +110,16 @@ export default {
     let res = await this.$store.dispatch('api/carousels/index', {page: 1, size: 20});
     let carousel = res.data.docs[0];
     if(carousel && carousel.images.length > 0) {
-      this.carousel = carousel;
+      const width = document.documentElement.clientWidth;
+      let field = 'pc_url';
+      if(width < 720) {
+        field = 'm_url';
+      }
+      carousel.images.forEach(image => {
+        image.url = image[field];
+      });
     }
+    this.carousel = carousel;
   }
 };
 </script>

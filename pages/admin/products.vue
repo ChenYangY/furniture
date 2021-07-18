@@ -236,7 +236,7 @@ export default {
         this.alertMsg = res.msg;
         return;
       }
-      this.$bvModal.hide('product_form', 'hide');
+      this.$bvModal.hide('product_modal', 'hide');
       this.clearForm();
       this.$fetch();
     },
@@ -258,6 +258,7 @@ export default {
         this.alertMsg = this.msg;
         return;
       }
+      this.$bvModal.hide('product_batch_import_modal');
       this.$fetch();
     }
   },

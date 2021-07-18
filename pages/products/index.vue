@@ -11,7 +11,7 @@
             <b-link href="/products?tags=Lighting 灯">灯具</b-link>
           </div>
         </div>
-        <p>品牌中最早的一条线，关注寻常生活中真实所需的家居设计简单质朴。</p>
+        <!-- <p>品牌中最早的一条线，关注寻常生活中真实所需的家居设计简单质朴。</p> -->
         <ProductList :tags="tags" :brand="brand" :name="name"/>
       </div>
     </div>

@@ -19,7 +19,7 @@ SIGMALIVING 风物宜</p></div>
         <b-carousel>
             <b-carousel-slide
               v-for="(image, index) in carousel.images" :key="index"
-              :img-src="image.url"
+              :img-src="image.pc_url || image.url"
             >
             </b-carousel-slide>
         </b-carousel>

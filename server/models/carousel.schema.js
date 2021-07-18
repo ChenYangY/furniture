@@ -5,7 +5,8 @@ const CarouselSchema = new Schema({
   name: {type: String },
   status: {type: String, default: 'OFF', enum: ['ON', 'OFF']},
   images:[{
-    url: {type: String},
+    m_url: {type: String},
+    pc_url: {type: String},
     redirect: {type: String},
   }]
 },{
