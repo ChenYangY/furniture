@@ -67,9 +67,17 @@ export default {
     };
   },
   beforeMount() {
-    let width = document.body.clientWidth;
-    console.log(width);
-    if(width < 1400 && width > 960) {
+    let width = document.documentElement.clientWidth;
+    let height = document.documentElement.clientHeight;
+    let carouselHeight = height - (width > 800? 200: 130);
+    let carouselWidth = Math.floor(carouselHeight * (16/9));
+    if(width > height) {
+      let slides = width/carouselWidth;
+      if( slides > 1  && slides < 2) {
+        this.swiperOption.slidesPerView = parseFloat(slides.toFixed(2), 10);
+      }
+    }
+    else if(width < 1400 && width > 960) {
       this.swiperOption.slidesPerView = 1.18;
     }
     else if(width < 960 && width > 480) {
