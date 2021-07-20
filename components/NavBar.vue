@@ -348,7 +348,7 @@ export default {
             },{
               label: 'Ceiling Lamp 顶灯'
             }, {
-              label: 'Standing Lamp 落地灯'
+              label: 'Floor Lamp 落地灯'
             }]
           },{
             label: 'Lifestyle 生活家居',
