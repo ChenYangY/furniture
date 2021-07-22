@@ -50,4 +50,5 @@ module.exports =  {
     },
     transpile: ['bootstrap-vue'],
   },
+  ssr: false,
 };

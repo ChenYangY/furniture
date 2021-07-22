@@ -33,7 +33,8 @@
     "nuxt": "^2.14.12",
     "swiper": "^6.7.5",
     "vue": "^2.6.12",
-    "vue-awesome-swiper": "^4.1.1"
+    "vue-awesome-swiper": "^4.1.1",
+    "vue-waterfall-plugin": "^1.1.0"
   },
   "devDependencies": {
     "eslint": "^7.22.0",
