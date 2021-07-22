@@ -3,7 +3,6 @@
     <div class='proudct-list clearfix'>
       <Waterfall
         :list="list"
-        :gutter="10"
         :breakpoints="{
           1200: { //当屏幕宽度小于等于1200
             rowPerView: 4,
@@ -20,7 +19,7 @@
         <template slot="item" slot-scope="props">
           <div class="card">
             <img :src="props.data.images[0]" alt="" @load="$refs.waterfall.refresh()">
-            <p>{{props.data.name}}</p>
+            <p style="padding: 0 5px;margin:0">{{props.data.name}}</p>
           </div>
         </template>
       </Waterfall>
