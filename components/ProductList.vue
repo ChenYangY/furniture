@@ -4,7 +4,7 @@
       <Waterfall
         :list="list"
         :breakpoints="{
-          1200: { //当屏幕宽度小于等于1200
+          10000: { //当屏幕宽度小于等于1200
             rowPerView: 4,
           },
           800: { //当屏幕宽度小于等于800
@@ -20,7 +20,7 @@
           <b-link :href="'/products/' + props.data._id" class="product-list-item-a">
             <div class='card'>
                 <img :src="props.data.images[0]" alt="" @load="$refs.waterfall.refresh()">
-                <p style="padding: 0 5px;margin:0">{{props.data.name}}</p>
+                <p class="product-list-item-p">{{props.data.name}}</p>
             </div>
           </b-link>
         </template>
@@ -43,6 +43,10 @@
       columns: 2 !important;
       column-gap: 3px !important;
     }
+  }
+
+  .card > img {
+    width: 100%;
   }
 
   .product-list {
@@ -74,6 +78,13 @@
   .product-list-item-a:hover {
     text-decoration: none;
   }
+  .product-list-item-p {
+    padding: 8px 10px;
+    margin:0;
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+
   .product-list-item > a {
     color: black;
     display: block !important;
