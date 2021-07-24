@@ -17,10 +17,12 @@
         ref="waterfall"
         >
         <template slot="item" slot-scope="props">
-          <div class="card">
-            <img :src="props.data.images[0]" alt="" @load="$refs.waterfall.refresh()">
-            <p style="padding: 0 5px;margin:0">{{props.data.name}}</p>
-          </div>
+          <b-link :href="'/products/' + props.data._id" class="product-list-item-a">
+            <div class='card'>
+                <img :src="props.data.images[0]" alt="" @load="$refs.waterfall.refresh()">
+                <p style="padding: 0 5px;margin:0">{{props.data.name}}</p>
+            </div>
+          </b-link>
         </template>
       </Waterfall>
     </div>
@@ -65,6 +67,12 @@
      width: 100%;
      vertical-align: top;
      /* height: 500px; */
+  }
+  .product-list-item-a {
+    color: black;
+  }
+  .product-list-item-a:hover {
+    text-decoration: none;
   }
   .product-list-item > a {
     color: black;
