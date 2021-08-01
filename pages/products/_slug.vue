@@ -65,7 +65,7 @@
           </div>
         </div>
         <p>品牌中最早的一条线，关注寻常生活中真实所需的家居设计简单质朴。</p>
-        <ProductList />
+        <ProductListHome :rowItems=2 :rowheight=400 />
       </div>
     </div>
     <footer class='page-footer clearfix'>

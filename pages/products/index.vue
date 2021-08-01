@@ -12,7 +12,7 @@
           </div>
         </div>
         <!-- <p>品牌中最早的一条线，关注寻常生活中真实所需的家居设计简单质朴。</p> -->
-        <ProductList :tags="tags" :brand="brand" :name="name"/>
+        <ProductListHome :tags="tags" :brand="brand" :name="name" :rowItems=2 :itemHeight=400 />
       </div>
     </div>
     <footer class='page-footer clearfix'>
@@ -23,7 +23,7 @@
 <style scoped>
   @media only screen and (max-width: 800px) {
     .product-all-box {
-      margin-top: 2rem;
+      /* margin-top: 2rem; */
       padding: 1rem !important;
     }
   }
@@ -32,6 +32,7 @@
   }
   .product-all-box-navbar {
     width: 100%;
+    padding: 1rem 0;
   }
   .product-all-title {
     font-size: 1.4rem;

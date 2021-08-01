@@ -1,3 +1,10 @@
+@font-face {
+  font-family: "Han Sans SC";
+  src: url('../fonts/NotoSansSC-DemiLight.woff.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
 h2 {
   font-size: 50px;
   font-weight: bold;
@@ -62,9 +69,5 @@ html, body {
   html {
     font-size: 14px !important;
     line-height: 18px;
-  }
-  .product-list-item {
-    width: 50% !important;
-    padding: 0 5px !important;
   }
 }

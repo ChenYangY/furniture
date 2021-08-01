@@ -1,50 +1,26 @@
 <template>
   <div>
     <div class='row navbar navbar-pc'>
-      <a href='/'>
-        <Logo height="120" width="120" />
+      <a href='/' style='margin-top:-2rem;'>
+        <LogoSVG :color= "logoColor" />
       </a>
-      <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'">
-        <a href='/' :class="current === '首页'? 'active':''">首页</a>
-      </div>
       <div
         :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'"
-        @mouseover="menus.products.isShow=true" @mouseleave="menus.products.isShow=false">
-        <a href='#' :class="current === '产品'? 'active': ''" >产品</a>
-        <div class='sub-menu' v-show="menus.products.isShow">
+        v-for="(menuItem, index) in menus.products.list" :key="index"
+        @mouseover="menuItem.isShow=true"
+        @mouseleave="menuItem.isShow=false"
+      >
+        <a :href="'/products?tags='+menuItem.label">{{menuItem.label}}</a>
+         <div class='sub-menu' v-show="menuItem.isShow">
+          <a href='#' class='sub-menu-title'>{{menuItem.label}}</a>
           <ul class="sub-menu-list">
-            <li v-for="(item, index) in menus.products.list" :key='index'>
+            <li v-for="(item, index) in menuItem.children" :key='index'>
               <a
                 :href="'/products?tags='+ item.label"
-                @mouseover="childMenu=item.children;childMenuTitle=item.label;"
               >{{item.label}}</a>
             </li>
           </ul>
-          <div v-show="childMenu.length > 0"
-            class='navbar-child-menu'
-          >
-            <!-- <label>{{childMenuTitle}}:</label> -->
-            <ul>
-              <li v-for="(child, childIdx) in childMenu" :key="childIdx">
-                <a :href="'/products?tags='+ child.label">{{child.label}}</a>
-              </li>
-            </ul>
-          </div>
-
         </div>
-      </div>
-      <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'" @mouseover="menus.brands.isShow=true" @mouseleave="menus.brands.isShow=false; childMenu=[];">
-        <a href='#'>品牌</a>
-        <div class='sub-menu' v-show="menus.brands.isShow">
-          <ul class="sub-menu-list">
-            <li v-for="(item, index) in menus.brands.list" :key='index'>
-              <a :href="'/products?brand='+item._id">{{item.name}}</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'">
-        <a href='/about-us' :class="current === '关于我们'? 'active': ''">关于我们</a>
       </div>
       <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'">
         <b-input-group class='search'>
@@ -60,14 +36,14 @@
       </div>
     </div>
     <div class='row navbar navbar-m'>
-      <a href='/'>
-        <Logo height="50" width="50" />
+      <a :href="'/products' + (mTitle === '全部产品'?('?tags='+mTitle):'')" class='m-navbar-title'>
+        {{mTitle}}
       </a>
-      <div :class="fontColor === 'black'? 'navbar-item-dark':'navbar-item-light'"
+      <a class='m-navbar-ellipse'
         @click="showMobileMenu=true"
       >
         <div class='ellipse'></div>
-      </div>
+      </a>
     </div>
     <div class='m-menu' v-show="showMobileMenu">
       <div class='m-menu-header clearfix'>
@@ -116,11 +92,12 @@
     }
   }
   .navbar {
-    padding: 35px 10% 0 10%;
-    font-size: 1.5rem;
+    padding: 35px 9% 0 9%;
+    font-size: 0.7rem;
   }
   .navbar-item-light, .navbar-item-dark {
-    padding: 25px 0px;
+    padding: 25px 0px 60px;
+    /* width: 8rem; */
     text-decoration-line: none;
   }
   .navbar-item-light > a {
@@ -155,43 +132,42 @@
     padding-bottom: 6px;
     border-bottom: 2px solid black;
   }
-  .wechat-official-account-qr-img {
-    position: absolute;
-    top: 105px;
-    width: 150px;
-    height: 150px;
-    z-index: 1000;
-  }
+
   .sub-menu {
     position: absolute;
     left:0;
-    top: 130px;
+    top: 145px;
     /* margin: 0px 6%; */
-    width: 100%;
+    width: 86%;
+    margin: 0 7%;
     min-height: 100px;
     z-index: 1000;
     background: rgba(255, 255, 255);
     border-radius: 5px;
-    padding: 2rem;
-    font-size: 1.2rem;
+    padding: 2rem 5rem;
+    font-size: 0.9rem;
     border-bottom: 1px solid #c6c6c5;
   }
   .sub-menu-title {
     line-height: 26px;
-    font-size: 18px;
     font-weight: bold;
     color: #535353;
     margin-bottom: 10px;
   }
+  .sub-menu-title:hover {
+    text-decoration: none;
+    cursor: text;
+  }
   .sub-menu-list {
     list-style: none;
-    padding: 0 10%
+    padding:0;
+    /* padding: 0 5% */
   }
 
   .sub-menu-list > li {
     display: inline-block;
-    /* width: 7rem; */
-    padding: 0.5rem 1.5rem;
+    width: 10rem;
+    padding: .7rem 0 .7rem 2rem;
     margin-top: 0.5rem;
   }
 
@@ -229,6 +205,14 @@
     border-top: 2px solid black;
     border-bottom: 2px solid black;
   }
+
+  .m-navbar-ellipse .ellipse {
+    height: .4rem;
+    width:1.4rem;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+  }
+
   .navbar-child-menu {
     width: 80%;
     margin-top: 1rem;
@@ -249,7 +233,15 @@
   .navbar-child-menu > ul > li > a {
     color: black;
   }
-
+  .navbar-m {
+    background-color: white;
+    padding: 24px 35px;
+  }
+  .m-navbar-title {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: black;
+  }
   .m-menu {
     position: absolute;
     background: white;
@@ -261,13 +253,14 @@
 
   .m-menu-header-label {
     font-size: 1.2rem;
-    font-weight: 500;
+    font-weight: bold;
     /* display:inline-block; */
     float: left;
   }
 
   .m-navbar-menu-list {
     list-style: none;
+    text-decoration: underline;
   }
 
   .m-navbar-menu-list {
@@ -283,7 +276,7 @@
   }
 
   .m-navbar-menu-list-1 > a {
-    font-weight: 500;
+    font-weight: bold;
     display: block;
     height: 2.5rem;
   }
@@ -297,15 +290,21 @@
 
 </style>
 <script>
-import Logo from '../components/Logo';
+import LogoSVG from '../components/LogoSVG';
 export default {
   components: {
-    Logo,
+    LogoSVG,
+  },
+  beforeMount() {
+    const tagStr = this.$route.query.tags || '全部产品';
+    const tag = tagStr.split(',').pop();
+    this.mTitle = tag;
   },
   data() {
     return {
       shoMenu: false,
       showMobileMenu: false,
+      mTitle: '',
       menus: {
         products: {
           list: [{
