@@ -1,6 +1,4 @@
 const _ = require('lodash');
-const fs = require('fs');
-const path = require('path');
 const MyUtil = require('../../common/myutil');
 const FileService = require('../../services/file.service');
 class AdminFileController {

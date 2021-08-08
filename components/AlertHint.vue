@@ -24,7 +24,6 @@
 export default {
   watch: {
     msg() {
-      console.log(this.dismissSecs);
       this.dismissCountDown = this.dismissSecs;
     }
   },

@@ -89,7 +89,7 @@
           >
             <TagInput :tags="form.tags" @delete='delTag' @add="addTag"/>
           </b-form-group>
-          <ImageInput :images="form.images" @del="delFormImage" @add='addFormImages'/>
+          <ImageInput :images="form.images" @del="delFormImage" @add='addFormImages' @error="imageUploadError" />
           <b-form-group label="介绍" label-for="brand_form_description">
             <b-form-textarea id='brand_form_description'
               v-model="form.description"
@@ -125,6 +125,8 @@
       </b-modal>
     </b-container>
     <AlertHint :msg="alertMsg" v-show="alertMsg"/>
+    <Loading :isShow="isShowBatchLoading" :progress="batchImportProgress" />
+    <Loading :progress="uploadProgress" :isShow="isShowUploadLoading" />
   </div>
 </template>
 
@@ -136,6 +138,7 @@ import AdminMenu from '../../components/admin/menu';
 import TagInput from '../../components/TagInput';
 import ImageInput from '../../components/ImageInuput';
 import AlertHint  from '../../components/AlertHint';
+
 export default {
   components: {AdminBar, AdminMenu, TagInput, ImageInput, AlertHint},
   data() {
@@ -166,6 +169,10 @@ export default {
     datas: states => states.admin.products.datas,
     fields: states => states.admin.products.fields,
     totalRows: states => states.admin.products.totalRows,
+    isShowBatchLoading: states => states.admin.products.isShowBatchLoading,
+    batchImportProgress: states => states.admin.products.batchImportProgress,
+    isShowUploadLoading: states => states.admin.isShowUploadLoading,
+    uploadProgress: states => states.admin.uploadProgress
   }),
   methods: {
     addTag(tag) {
@@ -258,9 +265,14 @@ export default {
         this.alertMsg = this.msg;
         return;
       }
+      console.log(this.isShowBatchLoading);
       this.$bvModal.hide('product_batch_import_modal');
       this.$fetch();
-    }
+    },
+    imageUploadError(message) {
+      console.log(message);
+      this.alertMsg = message;
+    },
   },
   mounted: async function () {
     let res = await this.$store.dispatch('api/brands/index', {page: 1, size: 100});

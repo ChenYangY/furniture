@@ -41,10 +41,13 @@ export default {
     },
     async add(event) {
       if(!event.target.files[0]) return;
-      const response = await this.$store.dispatch('admin/upload', event.target.files);
-      this.$emit('add', response.data.paths);
+      let response = await this.$store.dispatch('admin/upload', event.target.files);
       this.files = [];
-
+      if(response.code < 0) {
+        this.$emit('error', response.msg);
+        return ;
+      }
+      this.$emit('add', response.data.paths);
     }
   }
 };

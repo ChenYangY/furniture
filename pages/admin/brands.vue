@@ -89,6 +89,7 @@
       </b-modal>
     </b-container>
     <AlertHint :msg="alertMsg" v-show="alertMsg"/>
+    <Loading :progress="uploadProgress" :isShow="isShowUploadLoading" />
   </div>
 </template>
 
@@ -121,6 +122,8 @@ export default {
     datas: states => states.admin.brands.datas,
     fields: states => states.admin.brands.fields,
     totalRows: states => states.admin.brands.totalRows,
+    isShowUploadLoading: states => states.admin.isShowUploadLoading,
+    uploadProgress: states => states.admin.uploadProgress
   }),
   methods: {
     changePage(curPage) {

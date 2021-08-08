@@ -20,12 +20,9 @@ app.use((session({
 })));
 app.use(fileUpload({
   limits: { fileSize: 50 * 1024 * 1024 },
-  limitHandler: function(req, res) {
-    res.json({
-      msg: '文件太大了',
-      code: -1,
-    });
-  }
+  // debug: true,
+  abortOnLimit: true,
+  responseOnLimit: '{"msg": "文件太大了","code": -1}',
 }));
 
 app.get('hello', (req, res) => {

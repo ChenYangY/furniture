@@ -4,6 +4,8 @@ const routePath = '/admin-api/products';
 export const state = () => ({
   datas: [],
   totalRows: 0,
+  batchImportProgress: 0,
+  isShowBatchLoading: false,
   fields: [
     // {key: '_id',label: 'Id'},
     {key: 'name',label: '名称'},
@@ -54,6 +56,12 @@ export const mutations = {
   },
   batchImport() {
     console.log('batch-import zip file');
+  },
+  updateProgress(state, progess) {
+    state.batchImportProgress = progess;
+  },
+  showBatchLoading(state, status) {
+    state.isShowBatchLoading = status;
   }
 };
 
@@ -126,13 +134,21 @@ export const actions = {
     form.append('file', file);
     let res = null;
     try {
-      res = await axios.post(`${routePath}/batch-import`, form);
+      commit('updateProgress', 0);
+      commit('showBatchLoading', true);
+      res = await axios.post(`${routePath}/batch-import`, form, {
+        onUploadProgress(event) {
+          commit('updateProgress', Math.floor((event.loaded/event.total)*100));
+        },
+      });
     } catch(e) {
       res = e.response;
     }
+    commit('showBatchLoading', false);
     if(!res.data.code) {
       commit('batchImport');
     }
+    return res.data;
   }
 };
 

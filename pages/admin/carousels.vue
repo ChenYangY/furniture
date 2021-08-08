@@ -115,6 +115,7 @@
       </b-modal>
     </b-container>
     <AlertHint :msg="alertMsg" v-show="alertMsg"/>
+    <Loading :progress="uploadProgress" :isShow="isShowUploadLoading" />
   </div>
 </template>
 
@@ -159,6 +160,8 @@ export default {
     // carouselForm: states => states.admin.carousels.carouselForm,
     fields: states => states.admin.carousels.fields,
     totalRows: states => states.admin.carousels.totalRows,
+    isShowUploadLoading: states => states.admin.isShowUploadLoading,
+    uploadProgress: states => states.admin.uploadProgress
   }),
   methods: {
     changePage(curPage) {
