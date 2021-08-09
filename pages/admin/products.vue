@@ -262,7 +262,7 @@ export default {
     async submitBatchForm() {
       let res = await this.$store.dispatch('admin/products/batchImport', this.batch_import_file);
       if(res.code) {
-        this.alertMsg = this.msg;
+        this.alertMsg = res.msg;
         return;
       }
       console.log(this.isShowBatchLoading);

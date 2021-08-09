@@ -19,10 +19,10 @@ app.use((session({
   saveUninitialized: true,
 })));
 app.use(fileUpload({
-  limits: { fileSize: 50 * 1024 * 1024 },
+  limits: { fileSize: 500 * 1024 * 1024 },
   // debug: true,
   abortOnLimit: true,
-  responseOnLimit: '{"msg": "文件太大了","code": -1}',
+  responseOnLimit: `{"msg": "文件太大了_${Date.now()}","code": -1}`,
 }));
 
 app.get('hello', (req, res) => {

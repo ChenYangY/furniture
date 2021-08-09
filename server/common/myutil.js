@@ -10,7 +10,7 @@ class MyUtil {
     if(err) {
       return  {
         code: -1,
-        msg: err.toString(),
+        msg: err.toString() + '_' + Date.now(),
       };
     }
     return {

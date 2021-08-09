@@ -311,7 +311,7 @@ export default {
             label: '新品 New',
             children: [],
           }, {
-            label: 'Art Design 设计家具 ',
+            label: 'Bespoke Kitchen 定制厨房',
             children: [],
           },{
             label: 'Furniture 家具',

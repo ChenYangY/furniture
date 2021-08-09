@@ -24,7 +24,6 @@ class ProductController extends CRUDController {
       return;
     }
     const file = req.files.file;
-    return res.json(MyUtil.wrapperResponse('', {}));
     this.service.batchImport(file.data)
       .then(() => {
         res.json(MyUtil.wrapperResponse('', {}));

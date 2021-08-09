@@ -137,6 +137,7 @@ export const actions = {
       commit('updateProgress', 0);
       commit('showBatchLoading', true);
       res = await axios.post(`${routePath}/batch-import`, form, {
+        responseType: 'json',
         onUploadProgress(event) {
           commit('updateProgress', Math.floor((event.loaded/event.total)*100));
         },
