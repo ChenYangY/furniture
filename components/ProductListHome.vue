@@ -45,7 +45,7 @@
     vertical-align: top;
   }
   .product-list-item-img {
-    height: 500px;
+    /* height: 500px; */
     overflow:hidden;
     display: flex;
   }
@@ -103,7 +103,7 @@ export  default  {
     }
     if(this.itemHeight > 0 && width > 800) this.colHeight = this.itemHeight;
     let style = document.createElement('style');
-    style.innerHTML = `.product-list-item { width: ${(100/this.colNum).toFixed(2)}%;}.product-list-item-img {height: ${this.colHeight}px;}`;
+    style.innerHTML = `.product-list-item { width: ${(100/this.colNum).toFixed(2)}%;`;
     document.body.append(style);
   },
   methods: {
