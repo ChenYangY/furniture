@@ -166,7 +166,7 @@
 
   .sub-menu-list > li {
     display: inline-block;
-    width: 10rem;
+    /* width: 10rem; */
     padding: .7rem 0 .7rem 2rem;
     margin-top: 0.5rem;
   }
@@ -336,6 +336,8 @@ export default {
               label: 'Bed 床'
             },{
               label: 'Night Table 床头柜'
+            },{
+              label: 'Outdoor 户外家具'
             }]
           },{
             label: 'Lighting 灯',
@@ -357,7 +359,7 @@ export default {
             },{
               label: 'Rug 毯'
             },{
-              label: 'Accessories 其他家居'
+              label: 'Accessories 其它家居'
             },]
           },{
             label: 'Arts&Prints 艺术及及印刷品',
